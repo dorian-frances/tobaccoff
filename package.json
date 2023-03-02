@@ -6,9 +6,12 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {
+    "eslint": "^8.35.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "expo": "~48.0.4",
     "expo-status-bar": "~1.4.4",
     "react": "18.2.0",
@@ -16,8 +19,18 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@react-native-community/eslint-config": "^3.2.0",
     "@types/react": "~18.0.14",
-    "typescript": "^4.9.4"
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4",
+    "typescript": "*"
   },
   "private": true
 }
