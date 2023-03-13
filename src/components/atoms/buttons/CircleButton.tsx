@@ -18,7 +18,7 @@ const CircleButton = ({}) => {
           alignItems: 'center',
         }}
       >
-        <Icon name={'restart'} size={40} />
+        <Icon name={'restart'} size={40} color={Colors.INDICATIVE_TEXT_COLOR} />
       </View>
     </TouchableRipple>
   );

@@ -6,12 +6,38 @@ import { Colors } from '../../assets/colors/colors.enum';
 import SecondaryMetrics from '../organisms/SecondaryMetrics';
 import FailButtons from '../organisms/FailButtons';
 import Restart from '../organisms/Restart';
+import { Configuration } from '../../utils/storage/configuration.model';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
 
 const MetricsPage = ({}) => {
+  const navigation = useNavigation();
+  const [sinceValue, setSinceValue] = useState('');
+
+  const readData = async () => {
+    try {
+      const data = await AsyncStorage.getItem('configuration');
+      if (data === null) {
+        return navigation.navigate('MetricsScreen');
+      }
+      const configuration = JSON.parse(data) as Configuration;
+      setSinceValue(configuration.stopDate);
+    } catch (e) {
+      alert('Failed to fetch the input from storage');
+    }
+  };
+
+  useEffect(() => {
+    readData();
+  });
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.headerStyle}>
-        <MetricsHeader />
+        <MetricsHeader
+          text={`Depuis le ${new Date(sinceValue).toLocaleDateString()}`}
+        />
       </View>
       <View style={styles.savingsStyle}>
         <SavingsMetrics />
