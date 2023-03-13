@@ -4,9 +4,6 @@ import { useFonts } from 'expo-font';
 import { fr, registerTranslation } from 'react-native-paper-dates';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ConfigurationPage from './src/components/pages/ConfigurationPage';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet } from 'react-native';
-import { Colors } from './src/assets/colors/colors.enum';
 import { NavigationContainer } from '@react-navigation/native';
 import MetricsPage from './src/components/pages/MetricsPage';
 
