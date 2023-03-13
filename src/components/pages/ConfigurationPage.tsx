@@ -2,10 +2,12 @@ import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import CigaretteAmountConfiguration from '../organisms/CigaretteAmountConfiguration';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ButtonComponent from '../atoms/buttons/ButtonComponent';
+import ClassicButton from '../atoms/buttons/ClassicButton';
 import HeaderText from '../atoms/texts/HeaderText';
 import StopDateConfiguration from '../organisms/StopDateConfiguration';
 import { useNavigation } from '@react-navigation/native';
+import { Colors } from '../../assets/colors/colors.enum';
+import { FontsEnum } from '../../assets/fonts/fonts.enum';
 
 const ConfigurationPage = () => {
   const navigation = useNavigation();
@@ -21,9 +23,10 @@ const ConfigurationPage = () => {
         <CigaretteAmountConfiguration />
       </View>
       <View style={styles.validateButtonStyle}>
-        <ButtonComponent
+        <ClassicButton
           mode={'elevated'}
           text={'Valider'}
+          fontFamily={FontsEnum.BOLD}
           onPress={() => navigation.navigate('MetricsScreen')}
         />
       </View>
@@ -35,6 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: Colors.VIEW_BACKGROUND_COLOR,
   },
   headerStyle: {
     marginTop: 40,

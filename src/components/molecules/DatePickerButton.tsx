@@ -45,7 +45,7 @@ const DatePickerButton = ({
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            borderColor: 'black',
+            borderColor: Colors.INPUT_STROKE_COLOR,
             borderWidth: 1,
             borderRadius: 100,
             height: 50,
