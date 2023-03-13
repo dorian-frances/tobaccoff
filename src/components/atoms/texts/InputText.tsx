@@ -1,6 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
+import { Colors } from '../../../assets/colors/colors.enum';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 type CigaretteAmountTextInputProps = {
   mode?: 'flat' | 'outlined';
@@ -22,7 +24,11 @@ const InputText = ({
       right={<TextInput.Affix text={rightText} />}
       style={styles.textInputStyle}
       onChangeText={(newText) => setText(newText)}
-      outlineStyle={{ width: '100%', borderRadius: 100 }}
+      outlineStyle={{
+        width: '100%',
+        borderRadius: 100,
+        borderColor: Colors.INPUT_STROKE_COLOR,
+      }}
       keyboardType={'numeric'}
     />
   );
@@ -30,7 +36,7 @@ const InputText = ({
 
 const styles = StyleSheet.create({
   textInputStyle: {
-    fontFamily: 'Montserrat-Medium',
+    fontFamily: FontsEnum.MEDIUM,
     fontSize: 15,
   },
 });

@@ -1,5 +1,6 @@
 import { Text, StyleSheet } from 'react-native';
 import React from 'react';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 type TextHeaderProps = {
   text: string;
@@ -11,7 +12,7 @@ const HeaderText = ({ text = 'Lorem Ipsum' }: TextHeaderProps) => {
 
 const styles = StyleSheet.create({
   text: {
-    fontFamily: 'Montserrat-Bold',
+    fontFamily: FontsEnum.BOLD,
     fontSize: 40,
   },
 });

@@ -14,13 +14,13 @@ const CigaretteAmountConfiguration = ({
   return (
     <View style={containerStyle}>
       <View style={styles.sectionTextStyle}>
-        <SectionText text={'Je fumais : '} />
+        <SectionText text={'Je fumais : '} fontSize={22} />
       </View>
       <View style={styles.segmentedButtonStyle}>
         <SegmentedButtonsTobaccoType />
       </View>
       <View style={styles.inputTextStyle}>
-        <InputText label={'Cigarettes / jours'} rightText={'/jours'} />
+        <InputText label={'Cigarettes / jour'} rightText={'/jour'} />
       </View>
     </View>
   );

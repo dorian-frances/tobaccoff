@@ -8,7 +8,7 @@ const StopDateConfiguration = ({}: StopDateConfigurationProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.sectionTextStyle}>
-        <SectionText text={"J'ai arrêté depuis : "} />
+        <SectionText text={"J'ai arrêté depuis : "} fontSize={22} />
       </View>
       <View style={styles.datePickerStyle}>
         <DatePickerButton infoText={'Sélectionnez une date'} />

@@ -17,7 +17,7 @@ const SegmentedButtonsTobaccoType = ({}: SegmentedButtonsTobaccoTypeProps) => {
           showSelectedCheck: true,
         },
         {
-          value: 'roulees',
+          value: 'roulées',
           label: 'Roulées',
           showSelectedCheck: true,
         },

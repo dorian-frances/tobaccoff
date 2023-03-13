@@ -1,5 +1,6 @@
 import { Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 type InfoTextProps = {
   text: string;
@@ -11,7 +12,7 @@ const InfoText = ({ text = 'Lorem Ipsum' }: InfoTextProps) => {
 
 const styles = StyleSheet.create({
   textStyle: {
-    fontFamily: 'Montserrat-Medium',
+    fontFamily: FontsEnum.MEDIUM,
     fontSize: 10,
   },
 });

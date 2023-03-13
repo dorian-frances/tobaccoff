@@ -31,7 +31,7 @@ export default function App() {
     <PaperProvider>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="MetricsScreen"
+          initialRouteName="ConfigurationScreen"
           screenOptions={{ headerShown: false }}
         >
           <Stack.Screen

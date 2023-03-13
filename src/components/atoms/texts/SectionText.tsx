@@ -1,19 +1,21 @@
-import { StyleSheet, Text } from 'react-native';
+import { Text } from 'react-native';
 import React from 'react';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
-type SectionTextProps = {
-  text?: string;
+export type SectionTextProps = {
+  text: string;
+  fontSize: number;
 };
 
-const SectionText = ({ text = 'Section text example' }: SectionTextProps) => {
-  return <Text style={styles.text}>{text}</Text>;
+const SectionText = ({
+  text = 'Section text example',
+  fontSize = 22,
+}: SectionTextProps) => {
+  return (
+    <Text style={{ fontFamily: FontsEnum.MEDIUM, fontSize: fontSize }}>
+      {text}
+    </Text>
+  );
 };
-
-const styles = StyleSheet.create({
-  text: {
-    fontFamily: 'Montserrat-Medium',
-    fontSize: 22,
-  },
-});
 
 export default SectionText;
