@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { Colors } from '../../../assets/colors/colors.enum';
@@ -8,14 +8,16 @@ type CigaretteAmountTextInputProps = {
   mode?: 'flat' | 'outlined';
   label?: string;
   rightText?: string;
+  getCigaretteAmount: (cigaretteAmount: string) => void;
 };
 
 const InputText = ({
   mode = 'outlined',
   label = 'Lorem ipsum',
   rightText = '/Lorem',
+  getCigaretteAmount,
 }: CigaretteAmountTextInputProps) => {
-  const [text, setText] = useState('');
+  const [cigaretteAmount, setCigaretteAmount] = useState('');
 
   return (
     <TextInput
@@ -23,13 +25,14 @@ const InputText = ({
       label={label}
       right={<TextInput.Affix text={rightText} />}
       style={styles.textInputStyle}
-      onChangeText={(newText) => setText(newText)}
+      onChangeText={(cigaretteAmount) => setCigaretteAmount(cigaretteAmount)}
       outlineStyle={{
         width: '100%',
         borderRadius: 100,
         borderColor: Colors.INPUT_STROKE_COLOR,
       }}
       keyboardType={'numeric'}
+      onEndEditing={() => getCigaretteAmount(cigaretteAmount)}
     />
   );
 };

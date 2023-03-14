@@ -7,18 +7,21 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 type DatePickerButtonProps = {
   infoText: string;
+  setStopDate: (stopDate: Date) => void;
 };
 
 const DatePickerButton = ({
   infoText = 'Lorem Ipsum',
+  setStopDate,
 }: DatePickerButtonProps) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
-  const onChange = (event: any, selectedDate: any) => {
+  const onChange = async (event: any, selectedDate: any) => {
     setShow(false);
     setDate(selectedDate);
+    setStopDate(selectedDate);
   };
 
   const showMode = (mode: string) => {
@@ -31,6 +34,7 @@ const DatePickerButton = ({
   const showDatePicker = () => {
     showMode('date');
   };
+
   return (
     <View>
       <TouchableRipple

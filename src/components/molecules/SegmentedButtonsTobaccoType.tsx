@@ -2,14 +2,21 @@ import { SegmentedButtons } from 'react-native-paper';
 import { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
-type SegmentedButtonsTobaccoTypeProps = {};
+type SegmentedButtonsTobaccoTypeProps = {
+  getCigaretteType: (cigaretteType: string) => void;
+};
 
-const SegmentedButtonsTobaccoType = ({}: SegmentedButtonsTobaccoTypeProps) => {
+const SegmentedButtonsTobaccoType = ({
+  getCigaretteType,
+}: SegmentedButtonsTobaccoTypeProps) => {
   const [value, setValue] = useState('industrielles');
   return (
     <SegmentedButtons
       value={value}
-      onValueChange={setValue}
+      onValueChange={(value) => {
+        setValue(value);
+        getCigaretteType(value);
+      }}
       buttons={[
         {
           value: 'industrielles',
