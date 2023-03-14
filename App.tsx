@@ -9,7 +9,7 @@ import MetricsPage from './src/components/pages/MetricsPage';
 
 registerTranslation('fr-FR', fr);
 
-export default function App() {
+const App = () => {
   const [fontLoaded] = useFonts({
     'Montserrat-Regular': require('./src/assets/fonts/Montserrat-Regular.ttf'),
     'Montserrat-Medium': require('./src/assets/fonts/Montserrat-Medium.ttf'),
@@ -40,4 +40,6 @@ export default function App() {
       </NavigationContainer>
     </PaperProvider>
   );
-}
+};
+
+export default App;

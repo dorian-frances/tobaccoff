@@ -33,7 +33,7 @@ const ConfigurationPage = () => {
       );
 
       await AsyncStorage.setItem(
-        'configuration',
+        '@configuration',
         JSON.stringify(newConfiguration)
       );
       console.log(
