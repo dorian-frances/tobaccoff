@@ -2,7 +2,7 @@ import { Text, TouchableRipple } from 'react-native-paper';
 import { Platform, View } from 'react-native';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import React, { useState } from 'react';
-import { Colors } from '../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
 type DatePickerButtonProps = {
@@ -49,21 +49,21 @@ const DatePickerButton = ({
           style={{
             flexDirection: 'row',
             alignItems: 'center',
-            borderColor: Colors.INPUT_STROKE_COLOR,
+            borderColor: ColorsEnum.INPUT_STROKE_COLOR,
             borderWidth: 1,
             borderRadius: 100,
             height: 50,
-            backgroundColor: Colors.INPUT_BACKGROUND_COLOR,
+            backgroundColor: ColorsEnum.INPUT_BACKGROUND_COLOR,
           }}
         >
           <View style={{ marginLeft: 15 }}>
             <Icon name={'calendar-blank'} size={25} />
           </View>
           <View style={{ marginLeft: 15 }}>
-            <Text style={{ color: Colors.INDICATIVE_TEXT_COLOR }}>
+            <Text style={{ color: ColorsEnum.INDICATIVE_TEXT_COLOR }}>
               {infoText}
             </Text>
-            <Text style={{ color: Colors.BUSINESS_TEXT_COLOR }}>
+            <Text style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}>
               {date.toLocaleDateString()}
             </Text>
           </View>

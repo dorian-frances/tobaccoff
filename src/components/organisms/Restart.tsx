@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import CircleButton from '../atoms/buttons/CircleButton';
 import SectionText from '../atoms/texts/SectionText';
-import { Colors } from '../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 
 type RestartProps = {};
 
@@ -15,7 +15,7 @@ const Restart = ({}: RestartProps) => {
         <SectionText
           text={'Redémarrer le compteur'}
           fontSize={12}
-          color={Colors.INDICATIVE_TEXT_COLOR}
+          color={ColorsEnum.INDICATIVE_TEXT_COLOR}
         />
       </View>
     </View>

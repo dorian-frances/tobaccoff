@@ -1,6 +1,6 @@
 import { Button } from 'react-native-paper';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
-import { Colors } from '../../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
 type ButtonComponentProps = {
   text: string;
@@ -14,7 +14,7 @@ const ClassicButton = ({
   text = 'Lorem Ipsum',
   fontFamily = FontsEnum.MEDIUM,
   mode = 'elevated',
-  buttonColor = Colors.PRIMARY_COLOR_BUTTON,
+  buttonColor = ColorsEnum.PRIMARY_COLOR_BUTTON,
   onPress = () => console.log('Button pressed !'),
 }: ButtonComponentProps) => {
   return (

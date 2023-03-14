@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
-import { Colors } from '../../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 type CigaretteAmountTextInputProps = {
@@ -29,7 +29,7 @@ const InputText = ({
       outlineStyle={{
         width: '100%',
         borderRadius: 100,
-        borderColor: Colors.INPUT_STROKE_COLOR,
+        borderColor: ColorsEnum.INPUT_STROKE_COLOR,
       }}
       keyboardType={'numeric'}
       onEndEditing={() => getCigaretteAmount(cigaretteAmount)}

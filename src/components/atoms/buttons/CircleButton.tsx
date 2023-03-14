@@ -2,9 +2,13 @@ import { TouchableRipple } from 'react-native-paper';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import React from 'react';
 import { View } from 'react-native';
-import { Colors } from '../../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-const CircleButton = ({}) => {
+type CircleButtonProps = {
+  testID?: string;
+};
+
+const CircleButton = ({ testID }: CircleButtonProps) => {
   return (
     <TouchableRipple>
       <View
@@ -12,14 +16,18 @@ const CircleButton = ({}) => {
           height: 70,
           width: 70,
           borderRadius: 100,
-          backgroundColor: Colors.INPUT_BACKGROUND_COLOR,
+          backgroundColor: ColorsEnum.INPUT_BACKGROUND_COLOR,
           elevation: 2,
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        testID={'circleButtonTestId'}
+        testID={testID}
       >
-        <Icon name={'restart'} size={40} color={Colors.INDICATIVE_TEXT_COLOR} />
+        <Icon
+          name={'restart'}
+          size={40}
+          color={ColorsEnum.INDICATIVE_TEXT_COLOR}
+        />
       </View>
     </TouchableRipple>
   );

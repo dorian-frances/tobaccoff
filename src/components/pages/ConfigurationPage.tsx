@@ -6,7 +6,7 @@ import ClassicButton from '../atoms/buttons/ClassicButton';
 import HeaderText from '../atoms/texts/HeaderText';
 import StopDateConfiguration from '../organisms/StopDateConfiguration';
 import { useNavigation } from '@react-navigation/native';
-import { Colors } from '../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: Colors.VIEW_BACKGROUND_COLOR,
+    backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
   },
   headerStyle: {
     marginTop: 40,
