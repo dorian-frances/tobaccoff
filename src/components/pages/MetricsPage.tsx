@@ -10,16 +10,17 @@ import { Configuration } from '../../utils/storage/configuration.model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { MetricsScreenNavigationProp } from '../../routes/RootStackParamList';
 
 const MetricsPage = ({}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<MetricsScreenNavigationProp>();
   const [sinceValue, setSinceValue] = useState('');
 
   const readData = async () => {
     try {
       const data = await AsyncStorage.getItem('@configuration');
       if (data === null) {
-        return navigation.navigate('MetricsScreen');
+        return navigation.navigate('ConfigurationScreen');
       }
       const configuration = JSON.parse(data) as Configuration;
       setSinceValue(configuration.stopDate);

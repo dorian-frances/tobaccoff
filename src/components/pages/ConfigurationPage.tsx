@@ -13,9 +13,10 @@ import {
   CigaretteType,
   Configuration,
 } from '../../utils/storage/configuration.model';
+import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
 
 const ConfigurationPage = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<ConfigurationScreenNavigationProp>();
   const [stopDate, setStopDate] = useState(new Date());
   const [cigaretteType, setCigaretteType] = useState(CigaretteType.INDUSTRIAL);
   const [cigaretteAmount, setCigaretteAmount] = useState('');
