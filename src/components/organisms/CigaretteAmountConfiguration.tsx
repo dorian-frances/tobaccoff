@@ -32,6 +32,7 @@ const CigaretteAmountConfiguration = ({
           getCigaretteAmount={(cigaretteAmount: string) => {
             getCigaretteAmount(cigaretteAmount);
           }}
+          placeholder={'Nombre de cigarettes'}
         />
       </View>
     </View>

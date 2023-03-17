@@ -6,9 +6,10 @@ import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 type CigaretteAmountTextInputProps = {
   mode?: 'flat' | 'outlined';
-  label?: string;
+  label: string;
   rightText?: string;
   getCigaretteAmount: (cigaretteAmount: string) => void;
+  placeholder: string;
 };
 
 const InputText = ({
@@ -16,6 +17,7 @@ const InputText = ({
   label = 'Lorem ipsum',
   rightText = '/Lorem',
   getCigaretteAmount,
+  placeholder,
 }: CigaretteAmountTextInputProps) => {
   const [cigaretteAmount, setCigaretteAmount] = useState('');
 
@@ -24,6 +26,7 @@ const InputText = ({
       mode={mode}
       label={label}
       right={<TextInput.Affix text={rightText} />}
+      placeholder={placeholder}
       style={styles.textInputStyle}
       onChangeText={(cigaretteAmount) => setCigaretteAmount(cigaretteAmount)}
       outlineStyle={{
