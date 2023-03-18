@@ -5,6 +5,6 @@ import { Divider } from 'react-native-paper';
 describe('<Divider/>', () => {
   it('should render correctly', () => {
     const divider = render(<Divider />);
-    expect(divider.toJSON).toMatchSnapshot();
+    expect(divider.toJSON()).toMatchSnapshot();
   });
 });

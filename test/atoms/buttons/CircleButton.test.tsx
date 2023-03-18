@@ -5,7 +5,7 @@ import { render } from '@testing-library/react-native';
 describe('<CircleButton />', () => {
   it('should render correctly', () => {
     const circleButton = render(<CircleButton />);
-    expect(circleButton.toJSON).toMatchSnapshot();
+    expect(circleButton.toJSON()).toMatchSnapshot();
   });
 
   it('should find the CircleButton by testId', () => {

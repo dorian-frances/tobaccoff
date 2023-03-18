@@ -1,14 +1,14 @@
 import React from 'react';
-import { faker } from '@faker-js/faker';
-import { render } from '@testing-library/react-native';
+import { fireEvent, render, RenderAPI } from '@testing-library/react-native';
 import InputText from '../../../src/components/atoms/texts/InputText';
+import { ReactTestInstance } from 'react-test-renderer';
 
 jest.useFakeTimers();
 
 describe('<InputText/>', () => {
   const fakerGetCigaretteAmount = jest.fn();
-  const fakeLabelText = faker.name.firstName();
-  const fakePlaceHolder = faker.name.firstName();
+  const fakeLabelText = 'fakeLabelText';
+  const fakePlaceHolder = 'fakePlaceholder';
 
   it('should render correctly', () => {
     const headerText = render(
@@ -18,6 +18,22 @@ describe('<InputText/>', () => {
         placeholder={fakePlaceHolder}
       />
     );
-    expect(headerText.toJSON).toMatchSnapshot();
+    expect(headerText.toJSON()).toMatchSnapshot();
+  });
+
+  it('should change text correctly', () => {
+    const expectedText = 'fakeText';
+    const component: RenderAPI = render(
+      <InputText
+        getCigaretteAmount={fakerGetCigaretteAmount}
+        label={fakeLabelText}
+        placeholder={fakePlaceHolder}
+      />
+    );
+    const inputText: ReactTestInstance = component.getByTestId('text-input-ID');
+    fireEvent.changeText(inputText, expectedText);
+    const changeInputText: ReactTestInstance =
+      component.getByTestId('text-input-ID');
+    expect(changeInputText.props.value).toEqual(expectedText);
   });
 });

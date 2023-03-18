@@ -1,3 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<HeaderText/> should render correctly 1`] = `[Function]`;
+exports[`<HeaderText/> should render correctly 1`] = `
+<Text
+  style={
+    {
+      "fontFamily": "Montserrat-Bold",
+      "fontSize": 40,
+    }
+  }
+>
+  fakeText
+</Text>
+`;

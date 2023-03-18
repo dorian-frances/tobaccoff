@@ -36,6 +36,7 @@ const InputText = ({
       }}
       keyboardType={'numeric'}
       onEndEditing={() => getCigaretteAmount(cigaretteAmount)}
+      testID={'text-input-ID'}
     />
   );
 };

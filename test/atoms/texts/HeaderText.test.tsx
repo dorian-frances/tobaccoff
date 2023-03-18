@@ -4,10 +4,10 @@ import { faker } from '@faker-js/faker';
 import { render } from '@testing-library/react-native';
 
 describe('<HeaderText/>', () => {
-  const fakerText = faker.datatype.string();
+  const fakerText = 'fakeText';
   it('should render correctly', () => {
     const headerText = render(<HeaderText text={fakerText} />);
-    expect(headerText.toJSON).toMatchSnapshot();
+    expect(headerText.toJSON()).toMatchSnapshot();
   });
 
   it('should access text', () => {

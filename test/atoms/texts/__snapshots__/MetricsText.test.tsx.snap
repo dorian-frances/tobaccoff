@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InfoText/> should render correctly 1`] = `
+exports[`<MetricText/> should render correctly 1`] = `
 <Text
   style={
     [
@@ -17,12 +17,13 @@ exports[`<InfoText/> should render correctly 1`] = `
         "writingDirection": "ltr",
       },
       {
-        "fontFamily": "Montserrat-Medium",
-        "fontSize": 10,
+        "fontFamily": "Montserrat-Bold",
+        "fontSize": 20,
       },
     ]
   }
 >
-  fakeText
+  100,00
+  €
 </Text>
 `;
