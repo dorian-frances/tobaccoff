@@ -4,11 +4,9 @@ import React from 'react';
 import { View } from 'react-native';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-type CircleButtonProps = {
-  testID?: string;
-};
+type CircleButtonProps = {};
 
-const CircleButton = ({ testID }: CircleButtonProps) => {
+const CircleButton = ({}: CircleButtonProps) => {
   return (
     <TouchableRipple>
       <View
@@ -21,7 +19,7 @@ const CircleButton = ({ testID }: CircleButtonProps) => {
           justifyContent: 'center',
           alignItems: 'center',
         }}
-        testID={testID}
+        testID={'circleButton'}
       >
         <Icon
           name={'restart'}

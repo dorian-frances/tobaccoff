@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DatePickerButton/> should render correctly 1`] = `
+<View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": false,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onBlur={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      [
+        {
+          "overflow": "hidden",
+        },
+        false,
+        {
+          "borderRadius": 100,
+          "height": 50,
+        },
+      ]
+    }
+    testID="dateTimePickerTouchable"
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "backgroundColor": "#FFFFFF",
+          "borderColor": "#79747E",
+          "borderRadius": 100,
+          "borderWidth": 1,
+          "flexDirection": "row",
+          "height": 50,
+        }
+      }
+    >
+      <View
+        style={
+          {
+            "marginLeft": 15,
+          }
+        }
+      >
+        <Text />
+      </View>
+      <View
+        style={
+          {
+            "marginLeft": 15,
+          }
+        }
+      >
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "letterSpacing": 0,
+              },
+              {
+                "writingDirection": "ltr",
+              },
+              {
+                "color": "#79747E",
+              },
+            ]
+          }
+        >
+          fakeInfoText
+        </Text>
+        <Text
+          style={
+            [
+              {
+                "textAlign": "left",
+              },
+              {
+                "color": "rgba(28, 27, 31, 1)",
+                "fontFamily": "System",
+                "fontWeight": "400",
+                "letterSpacing": 0,
+              },
+              {
+                "writingDirection": "ltr",
+              },
+              {
+                "color": "#000000",
+              },
+            ]
+          }
+          testID="dateText"
+        >
+          18/03/2023
+        </Text>
+      </View>
+    </View>
+  </View>
+  <View />
+</View>
+`;

@@ -17,7 +17,7 @@ import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamLi
 
 const ConfigurationPage = () => {
   const navigation = useNavigation<ConfigurationScreenNavigationProp>();
-  const [stopDate, setStopDate] = useState(new Date());
+  const [stopDate, getStopDate] = useState(new Date());
   const [cigaretteType, setCigaretteType] = useState(CigaretteType.INDUSTRIAL);
   const [cigaretteAmount, setCigaretteAmount] = useState('');
 
@@ -54,7 +54,7 @@ const ConfigurationPage = () => {
       </View>
       <View style={styles.stopDateConfigurationStyle}>
         <StopDateConfiguration
-          setStopDate={(stopDate: Date) => setStopDate(stopDate)}
+          getStopDate={(date: Date) => getStopDate(date)}
         />
       </View>
       <View style={styles.cigaretteAmountConfigurationStyle}>

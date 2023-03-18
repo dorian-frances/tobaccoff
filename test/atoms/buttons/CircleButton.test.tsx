@@ -9,9 +9,8 @@ describe('<CircleButton />', () => {
   });
 
   it('should find the CircleButton by testId', () => {
-    const circleButtonTestId = 'circleButtonTestId';
-    const circleButton = render(<CircleButton testID={circleButtonTestId} />);
-    const foundButtonView = circleButton.getByTestId(circleButtonTestId);
+    const circleButton = render(<CircleButton />);
+    const foundButtonView = circleButton.getByTestId('circleButton');
     expect(foundButtonView).toBeTruthy();
   });
 });

@@ -1,43 +1,32 @@
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import SecondaryMetric from '../molecules/SmokedCigarettes';
+import SecondaryMetric, {
+  SecondaryMetricProps,
+} from '../molecules/SecondaryMetric';
 
-const SecondaryMetrics = ({}) => {
+export type SecondaryMetricsProps = {
+  nonSmokedMetricProps: SecondaryMetricProps;
+  smokedMetricProps: SecondaryMetricProps;
+  lifePointsMetricProps: SecondaryMetricProps;
+};
+
+const SecondaryMetrics = ({
+  nonSmokedMetricProps,
+  smokedMetricProps,
+  lifePointsMetricProps,
+}: SecondaryMetricsProps) => {
   return (
     <View>
       <View style={{ flexDirection: 'row' }}>
         <View style={styles.nonSmokedMetricStyle}>
-          <SecondaryMetric
-            metricTextProp={{
-              metric: 20,
-              unit: '',
-              minimumFractionDigits: 0,
-              fontSize: 30,
-            }}
-            sectionTextProp={{ text: 'Cigarettes non-fumées', fontSize: 13 }}
-          />
+          <SecondaryMetric {...nonSmokedMetricProps} />
         </View>
-        <View style={styles.nonSmokedMetricStyle}>
-          <SecondaryMetric
-            metricTextProp={{
-              metric: 10,
-              unit: '',
-              minimumFractionDigits: 0,
-              fontSize: 30,
-            }}
-            sectionTextProp={{ text: 'Cigarettes fumées', fontSize: 13 }}
-          />
+        <View style={styles.smokedMetricStyle}>
+          <SecondaryMetric {...smokedMetricProps} />
         </View>
       </View>
       <View style={styles.lifePointsMetricStyle}>
-        <SecondaryMetric
-          metricTextProp={{
-            metric: 10,
-            unit: '',
-            minimumFractionDigits: 0,
-            fontSize: 30,
-          }}
-          sectionTextProp={{ text: 'Points de vie gagnés', fontSize: 13 }}
-        />
+        <SecondaryMetric {...lifePointsMetricProps} />
       </View>
     </View>
   );

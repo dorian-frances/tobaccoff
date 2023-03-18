@@ -1,3 +1,4 @@
+import React from 'react';
 import { View } from 'react-native';
 import CircleButton from '../atoms/buttons/CircleButton';
 import SectionText from '../atoms/texts/SectionText';

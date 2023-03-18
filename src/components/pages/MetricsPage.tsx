@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import MetricsHeader from '../organisms/MetricsHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SavingsMetrics from '../organisms/SavingsMetrics';
+import PrimaryMetrics from '../organisms/PrimaryMetrics';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import SecondaryMetrics from '../organisms/SecondaryMetrics';
 import FailButtons from '../organisms/FailButtons';
@@ -41,10 +41,60 @@ const MetricsPage = ({}) => {
         />
       </View>
       <View style={styles.savingsStyle}>
-        <SavingsMetrics />
+        <PrimaryMetrics
+          totalSavingsProps={{
+            sectionTextProps: {
+              text: 'Economies totales',
+              fontSize: 22,
+            },
+            metricTextProps: {
+              metric: 20,
+              unit: '€',
+              minimumFractionDigits: 2,
+              fontSize: 50,
+            },
+          }}
+          monthlySavingsProps={{
+            sectionTextProps: { text: 'Ce mois-ci', fontSize: 18 },
+            metricTextProps: {
+              metric: 20,
+              unit: '€',
+              minimumFractionDigits: 2,
+              fontSize: 30,
+            },
+          }}
+        />
       </View>
       <View style={styles.secondaryMetricsStyle}>
-        <SecondaryMetrics />
+        <SecondaryMetrics
+          nonSmokedMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Cigarettes non-fumées', fontSize: 13 },
+          }}
+          smokedMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Cigarettes fumées', fontSize: 13 },
+          }}
+          lifePointsMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Jours de vie gagnés', fontSize: 13 },
+          }}
+        />
       </View>
       <View style={styles.failButtonsStyle}>
         <FailButtons />

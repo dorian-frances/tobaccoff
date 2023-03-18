@@ -3,7 +3,7 @@ import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
 export type MetricTextProps = {
   metric: number;
-  unit: string;
+  unit: '€' | '$' | '';
   minimumFractionDigits: number;
   fontSize: number;
 };

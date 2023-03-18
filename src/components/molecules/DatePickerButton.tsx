@@ -7,12 +7,12 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 
 type DatePickerButtonProps = {
   infoText: string;
-  setStopDate: (stopDate: Date) => void;
+  getStopDate: (stopDate: Date) => void;
 };
 
 const DatePickerButton = ({
   infoText = 'Lorem Ipsum',
-  setStopDate,
+  getStopDate,
 }: DatePickerButtonProps) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
@@ -21,7 +21,7 @@ const DatePickerButton = ({
   const onChange = async (event: any, selectedDate: any) => {
     setShow(false);
     setDate(selectedDate);
-    setStopDate(selectedDate);
+    getStopDate(selectedDate);
   };
 
   const showMode = (mode: string) => {
@@ -44,6 +44,7 @@ const DatePickerButton = ({
           borderRadius: 100,
           height: 50,
         }}
+        testID={'dateTimePickerTouchable'}
       >
         <View
           style={{
@@ -63,7 +64,10 @@ const DatePickerButton = ({
             <Text style={{ color: ColorsEnum.INDICATIVE_TEXT_COLOR }}>
               {infoText}
             </Text>
-            <Text style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}>
+            <Text
+              style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}
+              testID={'dateText'}
+            >
               {date.toLocaleDateString()}
             </Text>
           </View>

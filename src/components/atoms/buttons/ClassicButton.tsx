@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from 'react-native-paper';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';

@@ -20,6 +20,7 @@ const CigaretteAmountConfiguration = ({
       </View>
       <View style={styles.segmentedButtonStyle}>
         <SegmentedButtonsTobaccoType
+          defaultValue={'industrial'}
           getCigaretteType={(cigaretteType: string) =>
             getCigaretteType(cigaretteType)
           }
