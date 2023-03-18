@@ -34,6 +34,7 @@ describe('<SegmentedButtonsTobaccoType/>', () => {
         getCigaretteType={spyFunction}
       />
     );
+
     const industrialButton = component.getByTestId('industrialTypeButton');
     const rolledButton = component.getByTestId('rolledTypeButton');
     fireEvent.press(rolledButton);
