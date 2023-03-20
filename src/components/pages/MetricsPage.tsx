@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import MetricsHeader from '../organisms/MetricsHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import SavingsMetrics from '../organisms/SavingsMetrics';
-import { Colors } from '../../assets/colors/colors.enum';
+import PrimaryMetrics from '../organisms/PrimaryMetrics';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 import SecondaryMetrics from '../organisms/SecondaryMetrics';
 import FailButtons from '../organisms/FailButtons';
 import Restart from '../organisms/Restart';
@@ -10,16 +10,17 @@ import { Configuration } from '../../utils/storage/configuration.model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
+import { MetricsScreenNavigationProp } from '../../routes/RootStackParamList';
 
 const MetricsPage = ({}) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<MetricsScreenNavigationProp>();
   const [sinceValue, setSinceValue] = useState('');
 
   const readData = async () => {
     try {
       const data = await AsyncStorage.getItem('@configuration');
       if (data === null) {
-        return navigation.navigate('MetricsScreen');
+        return navigation.navigate('ConfigurationScreen');
       }
       const configuration = JSON.parse(data) as Configuration;
       setSinceValue(configuration.stopDate);
@@ -36,14 +37,66 @@ const MetricsPage = ({}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerStyle}>
         <MetricsHeader
-          text={`Depuis le ${new Date(sinceValue).toLocaleDateString()}`}
+          infoTextProps={{
+            text: `Depuis le ${new Date(sinceValue).toLocaleDateString()}`,
+          }}
         />
       </View>
       <View style={styles.savingsStyle}>
-        <SavingsMetrics />
+        <PrimaryMetrics
+          totalSavingsProps={{
+            sectionTextProps: {
+              text: 'Economies totales',
+              fontSize: 22,
+            },
+            metricTextProps: {
+              metric: 20,
+              unit: '€',
+              minimumFractionDigits: 2,
+              fontSize: 50,
+            },
+          }}
+          monthlySavingsProps={{
+            sectionTextProps: { text: 'Ce mois-ci', fontSize: 18 },
+            metricTextProps: {
+              metric: 20,
+              unit: '€',
+              minimumFractionDigits: 2,
+              fontSize: 30,
+            },
+          }}
+        />
       </View>
       <View style={styles.secondaryMetricsStyle}>
-        <SecondaryMetrics />
+        <SecondaryMetrics
+          nonSmokedMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Cigarettes non-fumées', fontSize: 13 },
+          }}
+          smokedMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Cigarettes fumées', fontSize: 13 },
+          }}
+          lifePointsMetricProps={{
+            metricTextProps: {
+              metric: 20,
+              unit: '',
+              minimumFractionDigits: 0,
+              fontSize: 30,
+            },
+            sectionTextProps: { text: 'Jours de vie gagnés', fontSize: 13 },
+          }}
+        />
       </View>
       <View style={styles.failButtonsStyle}>
         <FailButtons />
@@ -59,7 +112,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: Colors.VIEW_BACKGROUND_COLOR,
+    backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
   },
   headerStyle: {
     width: '80%',

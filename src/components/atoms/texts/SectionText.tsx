@@ -1,18 +1,18 @@
 import { Text } from 'react-native';
 import React from 'react';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
-import { Colors } from '../../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
 export type SectionTextProps = {
   text: string;
   fontSize: number;
-  color?: Colors;
+  color?: ColorsEnum;
 };
 
 const SectionText = ({
   text = 'Section text example',
   fontSize = 22,
-  color = Colors.BUSINESS_TEXT_COLOR,
+  color = ColorsEnum.BUSINESS_TEXT_COLOR,
 }: SectionTextProps) => {
   return (
     <Text

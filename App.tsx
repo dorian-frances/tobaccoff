@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ConfigurationPage from './src/components/pages/ConfigurationPage';
 import { NavigationContainer } from '@react-navigation/native';
 import MetricsPage from './src/components/pages/MetricsPage';
+import { RootStackParamList } from './src/routes/RootStackParamList';
 
 registerTranslation('fr-FR', fr);
 
@@ -22,7 +23,7 @@ const App = () => {
     return null;
   }
 
-  const Stack = createNativeStackNavigator();
+  const Stack = createNativeStackNavigator<RootStackParamList>();
 
   return (
     <PaperProvider>

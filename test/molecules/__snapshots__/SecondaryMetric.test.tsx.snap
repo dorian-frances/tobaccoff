@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SmokedCigarettes/> should render correctly 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+    }
+  }
+>
+  <Text
+    style={
+      [
+        {
+          "textAlign": "left",
+        },
+        {
+          "color": "rgba(28, 27, 31, 1)",
+          "fontFamily": "System",
+          "fontWeight": "400",
+          "letterSpacing": 0,
+        },
+        {
+          "writingDirection": "ltr",
+        },
+        {
+          "fontFamily": "Montserrat-Bold",
+          "fontSize": 20,
+        },
+      ]
+    }
+  >
+    50
+  </Text>
+  <Text
+    style={
+      {
+        "color": "#000000",
+        "fontFamily": "Montserrat-Medium",
+        "fontSize": 12,
+      }
+    }
+  >
+    Cigarettes fumées
+  </Text>
+</View>
+`;

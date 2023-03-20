@@ -1,10 +1,11 @@
+import React from 'react';
 import { Button } from 'react-native-paper';
-import { FontsEnum } from '../../../assets/fonts/fonts.enum';
-import { Colors } from '../../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
+import { StyleProp, TextStyle } from 'react-native';
 
 type ButtonComponentProps = {
   text: string;
-  fontFamily: string;
+  labelStyle: StyleProp<TextStyle>;
   mode: 'elevated' | 'outlined';
   onPress: any;
   buttonColor?: string;
@@ -12,16 +13,16 @@ type ButtonComponentProps = {
 
 const ClassicButton = ({
   text = 'Lorem Ipsum',
-  fontFamily = FontsEnum.MEDIUM,
+  labelStyle,
   mode = 'elevated',
-  buttonColor = Colors.PRIMARY_COLOR_BUTTON,
+  buttonColor = ColorsEnum.PRIMARY_COLOR_BUTTON,
   onPress = () => console.log('Button pressed !'),
 }: ButtonComponentProps) => {
   return (
     <Button
       mode={mode}
       onPress={onPress}
-      labelStyle={{ fontFamily: fontFamily, color: 'black', fontSize: 20 }}
+      labelStyle={labelStyle}
       loading={false}
       buttonColor={buttonColor}
       contentStyle={{ paddingTop: 5, height: 45 }}

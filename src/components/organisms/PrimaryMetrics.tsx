@@ -1,19 +1,24 @@
 import { StyleSheet, View } from 'react-native';
-import TotalSavings from '../molecules/TotalSavings';
-import MonthlySavings from '../molecules/MonthlySavings';
+import PrimaryMetric, { PrimaryMetricProps } from '../molecules/PrimaryMetric';
 import Divider from '../atoms/dividers/Divider';
 import React from 'react';
 
-type SavingsProps = {};
+export type PrimaryMetricsProps = {
+  totalSavingsProps: PrimaryMetricProps;
+  monthlySavingsProps: PrimaryMetricProps;
+};
 
-const SavingsMetrics = ({}: SavingsProps) => {
+const PrimaryMetrics = ({
+  totalSavingsProps,
+  monthlySavingsProps,
+}: PrimaryMetricsProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.totalSavingsStyle}>
-        <TotalSavings />
+        <PrimaryMetric {...totalSavingsProps} />
       </View>
       <View style={styles.monthlySavingsStyle}>
-        <MonthlySavings />
+        <PrimaryMetric {...monthlySavingsProps} />
       </View>
       <View style={styles.dividerStyle}>
         <Divider />
@@ -33,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SavingsMetrics;
+export default PrimaryMetrics;

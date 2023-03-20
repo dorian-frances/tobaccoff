@@ -1,14 +1,12 @@
-import { StyleSheet } from 'react-native';
-import InfoText from '../atoms/texts/InfoText';
+import React from 'react';
+import InfoText, { InfoTextProps } from '../atoms/texts/InfoText';
 
 type MetricsHeaderProps = {
-  text: string;
+  infoTextProps: InfoTextProps;
 };
 
-const MetricsHeader = ({ ...props }: MetricsHeaderProps) => {
-  return <InfoText text={props.text} />;
+const MetricsHeader = ({ infoTextProps }: MetricsHeaderProps) => {
+  return <InfoText {...infoTextProps} />;
 };
-
-const styles = StyleSheet.create({});
 
 export default MetricsHeader;

@@ -1,40 +1,39 @@
+import React, { useState } from 'react';
 import { SegmentedButtons } from 'react-native-paper';
-import { useState } from 'react';
-import { StyleSheet } from 'react-native';
 
-type SegmentedButtonsTobaccoTypeProps = {
+export type SegmentedButtonsTobaccoTypeProps = {
+  defaultValue: string;
   getCigaretteType: (cigaretteType: string) => void;
 };
 
 const SegmentedButtonsTobaccoType = ({
+  defaultValue,
   getCigaretteType,
 }: SegmentedButtonsTobaccoTypeProps) => {
-  const [value, setValue] = useState('industrielles');
+  const [cigaretteType, setCigaretteType] = useState(defaultValue);
   return (
     <SegmentedButtons
-      value={value}
-      onValueChange={(value) => {
-        setValue(value);
+      value={cigaretteType}
+      onValueChange={(value: string) => {
+        setCigaretteType(value);
         getCigaretteType(value);
       }}
       buttons={[
         {
-          value: 'industrielles',
+          value: 'industrial',
           label: 'Industrielles',
           showSelectedCheck: true,
+          testID: 'industrialTypeButton',
         },
         {
-          value: 'roulées',
+          value: 'rolled',
           label: 'Roulées',
           showSelectedCheck: true,
+          testID: 'rolledTypeButton',
         },
       ]}
     />
   );
 };
-
-const styles = StyleSheet.create({
-  container: {},
-});
 
 export default SegmentedButtonsTobaccoType;

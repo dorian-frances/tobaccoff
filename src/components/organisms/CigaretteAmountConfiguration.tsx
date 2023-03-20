@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import SectionText from '../atoms/texts/SectionText';
 import SegmentedButtonsTobaccoType from '../molecules/SegmentedButtonsTobaccoType';
@@ -20,6 +20,7 @@ const CigaretteAmountConfiguration = ({
       </View>
       <View style={styles.segmentedButtonStyle}>
         <SegmentedButtonsTobaccoType
+          defaultValue={'industrial'}
           getCigaretteType={(cigaretteType: string) =>
             getCigaretteType(cigaretteType)
           }
@@ -32,6 +33,7 @@ const CigaretteAmountConfiguration = ({
           getCigaretteAmount={(cigaretteAmount: string) => {
             getCigaretteAmount(cigaretteAmount);
           }}
+          placeholder={'Nombre de cigarettes'}
         />
       </View>
     </View>

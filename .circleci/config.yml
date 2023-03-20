@@ -1,9 +1,8 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
 jobs:
   react-native-test:
     docker:
-      - image: cimg/node:18.8
+      - image: cimg/node:16.15.1
 
     steps:
       - checkout
@@ -17,12 +16,14 @@ jobs:
           paths:
             - ./node_modules
       - run:
-          name: Tests
-          command: yarn test
-
+          name: ESLint
+          command: yarn lint
       - run:
-          name: Lint
-          command: yarn tsc
+          name: Update test snapshots
+          command: yarn test -u
+      - run:
+          name: Run tests
+          command: yarn test
 
 workflows:
   react-native-test:

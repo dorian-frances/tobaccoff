@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import ClassicButton from '../atoms/buttons/ClassicButton';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
-import { Colors } from '../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 
 const FailButtons = ({}) => {
   return (
@@ -20,7 +20,7 @@ const FailButtons = ({}) => {
           fontFamily={FontsEnum.MEDIUM}
           mode={'elevated'}
           onPress={() => console.log("'J'ai craqué' button clicked")}
-          buttonColor={Colors.SECONDARY_COLOR_BUTTON}
+          buttonColor={ColorsEnum.SECONDARY_COLOR_BUTTON}
         />
       </View>
     </View>

@@ -6,17 +6,18 @@ import ClassicButton from '../atoms/buttons/ClassicButton';
 import HeaderText from '../atoms/texts/HeaderText';
 import StopDateConfiguration from '../organisms/StopDateConfiguration';
 import { useNavigation } from '@react-navigation/native';
-import { Colors } from '../../assets/colors/colors.enum';
+import { ColorsEnum } from '../../assets/colors/colors.enum';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   CigaretteType,
   Configuration,
 } from '../../utils/storage/configuration.model';
+import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
 
 const ConfigurationPage = () => {
-  const navigation = useNavigation();
-  const [stopDate, setStopDate] = useState(new Date());
+  const navigation = useNavigation<ConfigurationScreenNavigationProp>();
+  const [stopDate, getStopDate] = useState(new Date());
   const [cigaretteType, setCigaretteType] = useState(CigaretteType.INDUSTRIAL);
   const [cigaretteAmount, setCigaretteAmount] = useState('');
 
@@ -53,7 +54,7 @@ const ConfigurationPage = () => {
       </View>
       <View style={styles.stopDateConfigurationStyle}>
         <StopDateConfiguration
-          setStopDate={(stopDate: Date) => setStopDate(stopDate)}
+          getStopDate={(date: Date) => getStopDate(date)}
         />
       </View>
       <View style={styles.cigaretteAmountConfigurationStyle}>
@@ -68,11 +69,11 @@ const ConfigurationPage = () => {
           }}
         />
       </View>
-      <View style={styles.validateButtonStyle}>
+      <View style={styles.validateButtonContainerStyle}>
         <ClassicButton
           mode={'elevated'}
           text={'Valider'}
-          fontFamily={FontsEnum.BOLD}
+          labelStyle={styles.validateButtonLabelStyle}
           onPress={async () => {
             await saveConfiguration(stopDate, cigaretteType, cigaretteAmount);
             navigation.navigate('MetricsScreen');
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: Colors.VIEW_BACKGROUND_COLOR,
+    backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
   },
   headerStyle: {
     marginTop: 40,
@@ -100,9 +101,14 @@ const styles = StyleSheet.create({
   cigaretteAmountConfigurationStyle: {
     width: '80%',
   },
-  validateButtonStyle: {
+  validateButtonContainerStyle: {
     width: '80%',
     marginTop: 110,
+  },
+  validateButtonLabelStyle: {
+    fontFamily: FontsEnum.BOLD,
+    color: 'black',
+    fontSize: 20,
   },
 });
 

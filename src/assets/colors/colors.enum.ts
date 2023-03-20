@@ -1,4 +1,4 @@
-export enum Colors {
+export enum ColorsEnum {
   VIEW_BACKGROUND_COLOR = '#F4F4F4',
   INPUT_BACKGROUND_COLOR = '#FFFFFF',
   INPUT_STROKE_COLOR = '#79747E',
