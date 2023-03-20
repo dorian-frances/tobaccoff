@@ -8,29 +8,46 @@ describe('<DatePickerButton/>', () => {
 
   it('should render correctly', () => {
     const component = render(
-      <DatePickerButton infoText={infoText} getStopDate={fakeSetStopDate} />
+      <DatePickerButton
+        infoText={infoText}
+        defaultDate={new Date(2023, 2, 18)}
+        getStopDate={fakeSetStopDate}
+      />
     );
     expect(component.toJSON()).toMatchSnapshot();
   });
 
   it('should render correctly with default date set to now', () => {
+    const defaultDate = new Date(2023, 2, 18);
     const component = render(
-      <DatePickerButton infoText={infoText} getStopDate={fakeSetStopDate} />
+      <DatePickerButton
+        infoText={infoText}
+        defaultDate={defaultDate}
+        getStopDate={fakeSetStopDate}
+      />
     );
     const dateText = component.getByTestId('dateText');
-    expect(dateText.props.children).toEqual(new Date().toLocaleDateString());
+    expect(dateText.props.children).toEqual(defaultDate.toLocaleDateString());
   });
 
   it('should not show dateTimePicker when initialising', () => {
     const component = render(
-      <DatePickerButton infoText={infoText} getStopDate={fakeSetStopDate} />
+      <DatePickerButton
+        infoText={infoText}
+        defaultDate={new Date(2023, 2, 18)}
+        getStopDate={fakeSetStopDate}
+      />
     );
     expect(() => component.getByTestId('dateTimePicker')).toThrowError();
   });
 
   it('should show dateTimePicker on click', () => {
     const component = render(
-      <DatePickerButton infoText={infoText} getStopDate={fakeSetStopDate} />
+      <DatePickerButton
+        infoText={infoText}
+        defaultDate={new Date(2023, 2, 18)}
+        getStopDate={fakeSetStopDate}
+      />
     );
     const touchableView = component.getByTestId('dateTimePickerTouchable');
     fireEvent.press(touchableView);
@@ -39,16 +56,20 @@ describe('<DatePickerButton/>', () => {
   });
 
   it('should change value on selected dated', async () => {
-    const newDate = new Date(2023, 0, 1);
-
     const component = render(
-      <DatePickerButton infoText={infoText} getStopDate={fakeSetStopDate} />
+      <DatePickerButton
+        infoText={infoText}
+        defaultDate={new Date(2023, 2, 18)}
+        getStopDate={fakeSetStopDate}
+      />
     );
+
     const touchableView = await component.getByTestId(
       'dateTimePickerTouchable'
     );
     fireEvent.press(touchableView);
 
+    const newDate = new Date(2023, 0, 1);
     const dateTimePicker = await component.getByTestId('dateTimePicker');
     fireEvent(dateTimePicker, 'onChange', {
       nativeEvent: {

@@ -1,3 +1,4 @@
+import React from 'react';
 import SectionText from '../atoms/texts/SectionText';
 import { StyleSheet, View } from 'react-native';
 import DatePickerButton from '../molecules/DatePickerButton';
@@ -15,6 +16,7 @@ const StopDateConfiguration = ({ getStopDate }: StopDateConfigurationProps) => {
       <View style={styles.datePickerStyle}>
         <DatePickerButton
           infoText={'Sélectionnez une date'}
+          defaultDate={new Date()}
           getStopDate={(stopDate: Date) => getStopDate(stopDate)}
         />
       </View>
