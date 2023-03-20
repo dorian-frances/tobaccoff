@@ -7,7 +7,7 @@ type ButtonComponentProps = {
   text: string;
   labelStyle: StyleProp<TextStyle>;
   mode: 'elevated' | 'outlined';
-  onPress: any;
+  onPress: () => void;
   buttonColor?: string;
 };
 
