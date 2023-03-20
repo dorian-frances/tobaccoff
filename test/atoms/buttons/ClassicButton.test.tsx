@@ -5,15 +5,19 @@ import React from 'react';
 
 describe('<ClassicButton/>', () => {
   const fakeButtonText = 'fakeButtonText';
-  const fontFamily = FontsEnum.BOLD;
   const fakeMode = 'elevated';
+  const labelStyle = {
+    fontFamily: FontsEnum.BOLD,
+    color: 'black',
+    fontSize: 20,
+  };
   const fakeOnPress = jest.fn();
 
   it('should render correctly', () => {
     const classicButton = render(
       <ClassicButton
+        labelStyle={labelStyle}
         text={fakeButtonText}
-        fontFamily={fontFamily}
         mode={fakeMode}
         onPress={fakeOnPress}
       />
@@ -25,7 +29,7 @@ describe('<ClassicButton/>', () => {
     const classicButton = render(
       <ClassicButton
         text={fakeButtonText}
-        fontFamily={fontFamily}
+        labelStyle={labelStyle}
         mode={fakeMode}
         onPress={fakeOnPress}
       />

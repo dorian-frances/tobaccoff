@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import ClassicButton from '../atoms/buttons/ClassicButton';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
+import React from 'react';
 
 const FailButtons = ({}) => {
   return (
@@ -9,7 +10,7 @@ const FailButtons = ({}) => {
       <View style={styles.vapotButtonStyle}>
         <ClassicButton
           text={'Je vapote'}
-          fontFamily={FontsEnum.MEDIUM}
+          labelStyle={styles.buttonLabelStyle}
           mode={'elevated'}
           onPress={() => console.log("'Je vapote' button clicked")}
         />
@@ -17,7 +18,7 @@ const FailButtons = ({}) => {
       <View style={styles.crackButtonStyle}>
         <ClassicButton
           text={"J'ai craqué"}
-          fontFamily={FontsEnum.MEDIUM}
+          labelStyle={styles.buttonLabelStyle}
           mode={'elevated'}
           onPress={() => console.log("'J'ai craqué' button clicked")}
           buttonColor={ColorsEnum.SECONDARY_COLOR_BUTTON}
@@ -31,6 +32,11 @@ const styles = StyleSheet.create({
   vapotButtonStyle: {},
   crackButtonStyle: {
     marginTop: 30,
+  },
+  buttonLabelStyle: {
+    fontFamily: FontsEnum.MEDIUM,
+    color: 'black',
+    fontSize: 20,
   },
 });
 
