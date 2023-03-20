@@ -69,11 +69,11 @@ const ConfigurationPage = () => {
           }}
         />
       </View>
-      <View style={styles.validateButtonStyle}>
+      <View style={styles.validateButtonContainerStyle}>
         <ClassicButton
           mode={'elevated'}
           text={'Valider'}
-          fontFamily={FontsEnum.BOLD}
+          labelStyle={styles.validateButtonLabelStyle}
           onPress={async () => {
             await saveConfiguration(stopDate, cigaretteType, cigaretteAmount);
             navigation.navigate('MetricsScreen');
@@ -101,9 +101,14 @@ const styles = StyleSheet.create({
   cigaretteAmountConfigurationStyle: {
     width: '80%',
   },
-  validateButtonStyle: {
+  validateButtonContainerStyle: {
     width: '80%',
     marginTop: 110,
+  },
+  validateButtonLabelStyle: {
+    fontFamily: FontsEnum.BOLD,
+    color: 'black',
+    fontSize: 20,
   },
 });
 

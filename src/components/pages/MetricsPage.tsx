@@ -37,7 +37,9 @@ const MetricsPage = ({}) => {
     <SafeAreaView style={styles.container}>
       <View style={styles.headerStyle}>
         <MetricsHeader
-          text={`Depuis le ${new Date(sinceValue).toLocaleDateString()}`}
+          infoTextProps={{
+            text: `Depuis le ${new Date(sinceValue).toLocaleDateString()}`,
+          }}
         />
       </View>
       <View style={styles.savingsStyle}>

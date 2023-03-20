@@ -17,7 +17,6 @@ const DatePickerButton = ({
   getStopDate,
 }: DatePickerButtonProps) => {
   const [date, setDate] = useState(defaultDate);
-  const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
 
   const onChange = async (event: any, selectedDate: any) => {
@@ -26,22 +25,18 @@ const DatePickerButton = ({
     getStopDate(selectedDate);
   };
 
-  const showMode = (mode: string) => {
+  const showMode = () => {
     if (Platform.OS === 'android') {
       setShow(false);
     }
     setShow(true);
-    setMode(mode);
-  };
-  const showDatePicker = () => {
-    showMode('date');
   };
 
   return (
     <View>
       <TouchableRipple
         borderless={true}
-        onPress={showDatePicker}
+        onPress={showMode}
         style={{
           borderRadius: 100,
           height: 50,

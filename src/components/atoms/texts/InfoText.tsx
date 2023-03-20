@@ -1,8 +1,9 @@
+import React from 'react';
 import { Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 
-type InfoTextProps = {
+export type InfoTextProps = {
   text: string;
 };
 

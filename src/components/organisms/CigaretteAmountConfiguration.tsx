@@ -1,4 +1,4 @@
-import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import SectionText from '../atoms/texts/SectionText';
 import SegmentedButtonsTobaccoType from '../molecules/SegmentedButtonsTobaccoType';
