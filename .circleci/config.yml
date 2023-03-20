@@ -19,7 +19,10 @@ jobs:
           name: ESLint
           command: yarn lint
       - run:
-          name: Tests
+          name: Update snapshots
+          command: yarn test -u
+      - run:
+          name: Run tests
           command: yarn test
 
 workflows:
