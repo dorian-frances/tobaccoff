@@ -4,9 +4,7 @@ import CircleButton from '../atoms/buttons/CircleButton';
 import SectionText from '../atoms/texts/SectionText';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 
-type RestartProps = {};
-
-const Restart = ({}: RestartProps) => {
+const Restart = ({}) => {
   return (
     <View style={{ alignItems: 'center' }}>
       <View>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { faker } from '@faker-js/faker';
 import { render } from '@testing-library/react-native';
 import InfoText from '../../../src/components/atoms/texts/InfoText';
 

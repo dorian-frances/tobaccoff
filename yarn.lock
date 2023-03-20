@@ -2230,10 +2230,10 @@
   dependencies:
     "@types/istanbul-lib-report" "*"
 
-"@types/jest@=29.4.1":
-  version "29.4.1"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.4.1.tgz#d76cbd07e5a24c0f4e86c2c0f9ed9e4ed33af3c8"
-  integrity sha512-zDQSWXG+ZkEvs2zFFMszePhx4euKz+Yt3Gg1P+RHjfJBinTTr6L2DEyovO4V/WrKXuF0Dgn56GWGZPDa6TW9eQ==
+"@types/jest@^29.5.0":
+  version "29.5.0"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-29.5.0.tgz#337b90bbcfe42158f39c2fb5619ad044bbb518ac"
+  integrity sha512-3Emr5VOl/aoBwnWcH/EFQvlSAmjV+XtV9GGu5mwdYew5vhQh0IUZx/60x0TzHDu09Bi7HMx10t/namdJw5QIcg==
   dependencies:
     expect "^29.0.0"
     pretty-format "^29.0.0"
@@ -2286,7 +2286,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@=18.0.28":
+"@types/react@*", "@types/react@^18.0.28":
   version "18.0.28"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.28.tgz#accaeb8b86f4908057ad629a26635fe641480065"
   integrity sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==
@@ -5814,7 +5814,7 @@ jest-environment-node@^29.2.1, jest-environment-node@^29.5.0:
     jest-mock "^29.5.0"
     jest-util "^29.5.0"
 
-jest-expo@=48.0.2:
+jest-expo@^48.0.2:
   version "48.0.2"
   resolved "https://registry.yarnpkg.com/jest-expo/-/jest-expo-48.0.2.tgz#eedab424e29e9bec2cf17a2fe1a653096ec82b04"
   integrity sha512-hxppv3I3/WgtswladHpPlcEHCv+5/6OG8nOuR3VqtS0h7ZJYuyQCMpXbsKZiA4R/sT4fHS0BUj9BBsdhrk/zXg==
@@ -6134,7 +6134,7 @@ jest-worker@^29.5.0:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jest@=29.5.0:
+jest@^29.5.0:
   version "29.5.0"
   resolved "https://registry.yarnpkg.com/jest/-/jest-29.5.0.tgz#f75157622f5ce7ad53028f2f8888ab53e1f1f24e"
   integrity sha512-juMg3he2uru1QoXX078zTa7pO85QyB9xajZc6bU+d9yEGwrKX6+vGmJQ3UdVZsvTEUARIdObzH68QItim6OSSQ==

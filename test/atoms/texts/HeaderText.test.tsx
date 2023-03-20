@@ -1,6 +1,5 @@
 import React from 'react';
 import HeaderText from '../../../src/components/atoms/texts/HeaderText';
-import { faker } from '@faker-js/faker';
 import { render } from '@testing-library/react-native';
 
 describe('<HeaderText/>', () => {

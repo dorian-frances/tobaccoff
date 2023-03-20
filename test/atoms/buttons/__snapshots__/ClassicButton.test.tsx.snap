@@ -155,7 +155,11 @@ exports[`<ClassicButton/> should render correctly 1`] = `
                     "letterSpacing": 0.1,
                     "lineHeight": 20,
                   },
-                  undefined,
+                  {
+                    "color": "black",
+                    "fontFamily": "Montserrat-Bold",
+                    "fontSize": 20,
+                  },
                 ],
               ]
             }

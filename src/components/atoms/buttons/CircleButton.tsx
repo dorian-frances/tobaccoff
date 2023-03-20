@@ -4,9 +4,7 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-type CircleButtonProps = {};
-
-const CircleButton = ({}: CircleButtonProps) => {
+const CircleButton = ({}) => {
   return (
     <TouchableRipple>
       <View style={styles.container} testID={'circleButton'}>

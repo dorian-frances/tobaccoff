@@ -3,8 +3,6 @@ import { fireEvent, render, RenderAPI } from '@testing-library/react-native';
 import InputText from '../../../src/components/atoms/texts/InputText';
 import { ReactTestInstance } from 'react-test-renderer';
 
-jest.useFakeTimers();
-
 describe('<InputText/>', () => {
   const fakerGetCigaretteAmount = jest.fn();
   const fakeLabelText = 'fakeLabelText';
