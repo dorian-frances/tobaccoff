@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>11/12</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -162,32 +162,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -246,44 +246,41 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 &nbsp;
 type DatePickerButtonProps = {
   infoText: string;
-  setStopDate: (stopDate: Date) =&gt; void;
+  defaultDate: Date;
+  getStopDate: (stopDate: Date) =&gt; void;
 };
 &nbsp;
 const DatePickerButton = ({
   infoText = <span class="branch-0 cbranch-no" title="branch not covered" >'Lorem Ipsum',</span>
-  setStopDate,
+  defaultDate,
+  getStopDate,
 }: DatePickerButtonProps) =&gt; {
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState('date');
+  const [date, setDate] = useState(defaultDate);
   const [show, setShow] = useState(false);
 &nbsp;
-  const onChange = <span class="fstat-no" title="function not covered" >as</span>ync (event: any, selectedDate: any) =&gt; {
-<span class="cstat-no" title="statement not covered" >    setShow(false);</span>
-<span class="cstat-no" title="statement not covered" >    setDate(selectedDate);</span>
-<span class="cstat-no" title="statement not covered" >    setStopDate(selectedDate);</span>
+  const onChange = async (event: any, selectedDate: any) =&gt; {
+    setShow(false);
+    setDate(selectedDate);
+    getStopDate(selectedDate);
   };
 &nbsp;
-  const showMode = (mode: string) =&gt; {
+  const showMode = () =&gt; {
     <span class="missing-if-branch" title="if path not taken" >I</span>if (Platform.OS === 'android') {
 <span class="cstat-no" title="statement not covered" >      setShow(false);</span>
     }
     setShow(true);
-    setMode(mode);
-  };
-  const showDatePicker = () =&gt; {
-    showMode('date');
   };
 &nbsp;
   return (
     &lt;View&gt;
       &lt;TouchableRipple
         borderless={true}
-        onPress={showDatePicker}
+        onPress={showMode}
         style={{
           borderRadius: 100,
           height: 50,
         }}
-        testID={'datePickerTouchable'}
+        testID={'dateTimePickerTouchable'}
       &gt;
         &lt;View
           style={{
@@ -303,7 +300,10 @@ const DatePickerButton = ({
             &lt;Text style={{ color: ColorsEnum.INDICATIVE_TEXT_COLOR }}&gt;
               {infoText}
             &lt;/Text&gt;
-            &lt;Text style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}&gt;
+            &lt;Text
+              style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}
+              testID={'dateText'}
+            &gt;
               {date.toLocaleDateString()}
             &lt;/Text&gt;
           &lt;/View&gt;
@@ -331,7 +331,7 @@ export default DatePickerButton;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-18T14:01:03.018Z
+                at 2023-03-20T19:27:52.427Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
