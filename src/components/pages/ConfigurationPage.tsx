@@ -12,14 +12,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   CigaretteType,
   Configuration,
-} from '../../utils/storage/configuration.model';
+} from '../../utils/model/configuration.model';
 import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
 
 const ConfigurationPage = () => {
   const navigation = useNavigation<ConfigurationScreenNavigationProp>();
-  const [stopDate, getStopDate] = useState(new Date());
-  const [cigaretteType, setCigaretteType] = useState(CigaretteType.INDUSTRIAL);
-  const [cigaretteAmount, setCigaretteAmount] = useState('');
+  const [dateToSave, getDateToSave] = useState(new Date());
+  const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
+    CigaretteType.INDUSTRIAL
+  );
+  const [cigaretteAmountToSave, setCigaretteAmountToSave] = useState('');
 
   const saveConfiguration = async (
     stopDate: Date,
@@ -27,6 +29,7 @@ const ConfigurationPage = () => {
     cigaretteAmount: string
   ) => {
     try {
+      stopDate.setUTCHours(0, 0, 0);
       const newConfiguration: Configuration = new Configuration(
         stopDate.toISOString(),
         cigaretteType,
@@ -54,18 +57,18 @@ const ConfigurationPage = () => {
       </View>
       <View style={styles.stopDateConfigurationStyle}>
         <StopDateConfiguration
-          getStopDate={(date: Date) => getStopDate(date)}
+          getStopDate={(date: Date) => getDateToSave(date)}
         />
       </View>
       <View style={styles.cigaretteAmountConfigurationStyle}>
         <CigaretteAmountConfiguration
           getCigaretteAmount={(cigaretteAmount) =>
-            setCigaretteAmount(cigaretteAmount)
+            setCigaretteAmountToSave(cigaretteAmount)
           }
           getCigaretteType={(cigaretteType: string) => {
             cigaretteType === 'industrielles'
-              ? setCigaretteType(CigaretteType.INDUSTRIAL)
-              : setCigaretteType(CigaretteType.ROLLED);
+              ? setCigaretteTypeToSave(CigaretteType.INDUSTRIAL)
+              : setCigaretteTypeToSave(CigaretteType.ROLLED);
           }}
         />
       </View>
@@ -75,7 +78,11 @@ const ConfigurationPage = () => {
           text={'Valider'}
           labelStyle={styles.validateButtonLabelStyle}
           onPress={async () => {
-            await saveConfiguration(stopDate, cigaretteType, cigaretteAmount);
+            await saveConfiguration(
+              dateToSave,
+              cigaretteTypeToSave,
+              cigaretteAmountToSave
+            );
             navigation.navigate('MetricsScreen');
           }}
         />
