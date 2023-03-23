@@ -5,4 +5,6 @@ export enum CigaretteData {
   rolledPacketPrice = 15.9,
   rolledPacketWeight = 30.0,
   rolledCigaretteWeight = 0.6,
+
+  secondsSavedPerCigarette = 660.0,
 }

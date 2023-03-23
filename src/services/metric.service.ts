@@ -1,24 +1,26 @@
 import { CigaretteType } from '../utils/model/configuration.model';
 import { CigaretteData } from '../utils/data/cigarette.data';
-import { DateUtils } from '../utils/date.utils';
+import { TimeUtils } from '../utils/time.utils';
 import { CigaretteUtils } from '../utils/cigarette.utils';
 
-export class SavingService {
+export class MetricService {
   constructor(
-    private dateUtils: DateUtils,
+    private dateUtils: TimeUtils,
     private cigaretteUtils: CigaretteUtils
   ) {}
 
   computeTotalSavings = (
     sinceDate: string,
     cigaretteType: CigaretteType,
-    cigaretteAmount: string
+    cigarettesPerDay: string
   ): number => {
-    const timeSinceStopDate = this.dateUtils.getTimeSinceStopDate(sinceDate);
+    const secondsSinceStopDate =
+      this.dateUtils.getSecondsSinceStopDate(sinceDate);
     if (cigaretteType === CigaretteType.INDUSTRIAL) {
       return (
-        (timeSinceStopDate *
-          ((CigaretteData.industrialPacketPrice * parseFloat(cigaretteAmount)) /
+        (secondsSinceStopDate *
+          ((CigaretteData.industrialPacketPrice *
+            parseFloat(cigarettesPerDay)) /
             this.cigaretteUtils.getNumberOfCigarettesPerPack(
               CigaretteType.INDUSTRIAL
             ))) /
@@ -27,9 +29,9 @@ export class SavingService {
     }
 
     return (
-      (timeSinceStopDate *
+      (secondsSinceStopDate *
         CigaretteData.rolledPacketPrice *
-        parseFloat(cigaretteAmount)) /
+        parseFloat(cigarettesPerDay)) /
       this.cigaretteUtils.getNumberOfCigarettesPerPack(CigaretteType.ROLLED) /
       (24.0 * 3600)
     );
@@ -38,26 +40,37 @@ export class SavingService {
   computeMonthSavings = (
     sinceDate: string,
     cigaretteType: CigaretteType,
-    cigaretteAmount: string
+    cigarettesPerDay: string
   ) => {
-    const timeSinceBeginningOfTheMonth =
-      this.dateUtils.getTimeSinceBeginningOfTheMonth(sinceDate);
+    const secondsSinceBeginningOfTheMonth =
+      this.dateUtils.getSecondsSinceBeginningOfTheMonth(sinceDate);
     if (cigaretteType === CigaretteType.INDUSTRIAL) {
       return (
-        (timeSinceBeginningOfTheMonth *
-          ((CigaretteData.industrialPacketPrice * parseFloat(cigaretteAmount)) /
+        (secondsSinceBeginningOfTheMonth *
+          ((CigaretteData.industrialPacketPrice *
+            parseFloat(cigarettesPerDay)) /
             CigaretteData.industrialCigarettePerPacket)) /
         (24.0 * 3600)
       );
     }
 
     return (
-      (timeSinceBeginningOfTheMonth *
+      (secondsSinceBeginningOfTheMonth *
         CigaretteData.rolledPacketPrice *
-        parseFloat(cigaretteAmount) *
+        parseFloat(cigarettesPerDay) *
         CigaretteData.rolledCigaretteWeight) /
       CigaretteData.rolledPacketWeight /
       (24.0 * 3600)
     );
   };
+
+  computeDaysSaved(stopDate: string, cigarettesPerDay: string): number {
+    const secondsSinceStopDate =
+      this.dateUtils.getSecondsSinceStopDate(stopDate);
+    return (
+      (secondsSinceStopDate / 3600.0 / 24) *
+      parseFloat(cigarettesPerDay) *
+      (CigaretteData.secondsSavedPerCigarette / 3600.0 / 24)
+    );
+  }
 }
