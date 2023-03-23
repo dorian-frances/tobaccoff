@@ -22,12 +22,11 @@ const MetricsPage = ({}) => {
   const [totalSavings, setTotalSavings] = useState(0);
   const [monthSavings, setMonthSavings] = useState(0);
 
-  const savingService = new SavingService(
-    new DateUtils(),
-    new CigaretteUtils()
-  );
-
-  const fetchConfigurationData = async () => {
+  const fetchConfigurationData = useCallback(async () => {
+    const savingService = new SavingService(
+      new DateUtils(),
+      new CigaretteUtils()
+    );
     const data = await AsyncStorage.getItem('@configuration');
     if (data !== null) {
       const configuration = JSON.parse(data) as Configuration;
@@ -50,11 +49,11 @@ const MetricsPage = ({}) => {
         `Configuration successfully fetched!\n${JSON.stringify(configuration)}`
       );
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchConfigurationData();
-  }, []);
+  }, [fetchConfigurationData]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -62,7 +61,7 @@ const MetricsPage = ({}) => {
       fetchConfigurationData();
       setRefreshing(false);
     }, 1000);
-  }, []);
+  }, [fetchConfigurationData]);
 
   return (
     <SafeAreaView style={styles.container}>
