@@ -11,8 +11,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { MetricsScreenNavigationProp } from '../../routes/RootStackParamList';
-import { SavingService } from '../../services/saving.service';
-import { DateUtils } from '../../utils/date.utils';
+import { MetricService } from '../../services/metric.service';
+import { TimeUtils } from '../../utils/time.utils';
 import { CigaretteUtils } from '../../utils/cigarette.utils';
 
 const MetricsPage = ({}) => {
@@ -21,10 +21,11 @@ const MetricsPage = ({}) => {
   const [sinceValue, setSinceValue] = useState('');
   const [totalSavings, setTotalSavings] = useState(0);
   const [monthSavings, setMonthSavings] = useState(0);
+  const [lifeDays, setLifeDays] = useState(0);
 
   const fetchConfigurationData = useCallback(async () => {
-    const savingService = new SavingService(
-      new DateUtils(),
+    const metricService = new MetricService(
+      new TimeUtils(),
       new CigaretteUtils()
     );
     const data = await AsyncStorage.getItem('@configuration');
@@ -32,16 +33,22 @@ const MetricsPage = ({}) => {
       const configuration = JSON.parse(data) as Configuration;
       setSinceValue(configuration.stopDate);
       setTotalSavings(
-        savingService.computeTotalSavings(
+        metricService.computeTotalSavings(
           configuration.stopDate,
           configuration.cigaretteType,
           configuration.cigaretteAmount
         )
       );
       setMonthSavings(
-        savingService.computeMonthSavings(
+        metricService.computeMonthSavings(
           configuration.stopDate,
           configuration.cigaretteType,
+          configuration.cigaretteAmount
+        )
+      );
+      setLifeDays(
+        metricService.computeDaysSaved(
+          configuration.stopDate,
           configuration.cigaretteAmount
         )
       );
@@ -122,7 +129,7 @@ const MetricsPage = ({}) => {
             }}
             lifePointsMetricProps={{
               metricTextProps: {
-                metric: 20,
+                metric: lifeDays,
                 formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
                 fontSize: 30,
               },

@@ -1,8 +1,8 @@
-export class DateUtils {
-  public getTimeSinceBeginningOfTheMonth = (sinceDate: string) => {
+export class TimeUtils {
+  public getSecondsSinceBeginningOfTheMonth = (sinceDate: string) => {
     const nowDate = new Date();
     if (this.isStopDateInCurrentMonth(sinceDate, nowDate)) {
-      return this.getTimeSinceStopDate(sinceDate);
+      return this.getSecondsSinceStopDate(sinceDate);
     }
     return (
       (nowDate.getTime() -
@@ -15,8 +15,8 @@ export class DateUtils {
     );
   };
 
-  public getTimeSinceStopDate = (sinceDate: string) => {
-    return (new Date(Date.now()).getTime() - Date.parse(sinceDate)) / 1000;
+  public getSecondsSinceStopDate = (sinceDate: string) => {
+    return (new Date().getTime() - Date.parse(sinceDate)) / 1000;
   };
 
   private isStopDateInCurrentMonth(sinceDate: string, nowDate: Date) {
