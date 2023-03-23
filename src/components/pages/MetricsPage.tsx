@@ -11,10 +11,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback, useEffect, useState } from 'react';
 import { MetricsScreenNavigationProp } from '../../routes/RootStackParamList';
-import {
-  computeMonthSavings,
-  computeTotalSavings,
-} from '../../utils/services/saving.service';
+import { SavingService } from '../../services/saving.service';
+import { DateUtils } from '../../utils/date.utils';
+import { CigaretteUtils } from '../../utils/cigarette.utils';
 
 const MetricsPage = ({}) => {
   const navigation = useNavigation<MetricsScreenNavigationProp>();
@@ -23,20 +22,26 @@ const MetricsPage = ({}) => {
   const [totalSavings, setTotalSavings] = useState(0);
   const [monthSavings, setMonthSavings] = useState(0);
 
+  const savingService = new SavingService(
+    new DateUtils(),
+    new CigaretteUtils()
+  );
+
   const fetchConfigurationData = async () => {
     const data = await AsyncStorage.getItem('@configuration');
     if (data !== null) {
       const configuration = JSON.parse(data) as Configuration;
       setSinceValue(configuration.stopDate);
       setTotalSavings(
-        computeTotalSavings(
+        savingService.computeTotalSavings(
           configuration.stopDate,
           configuration.cigaretteType,
           configuration.cigaretteAmount
         )
       );
       setMonthSavings(
-        computeMonthSavings(
+        savingService.computeMonthSavings(
+          configuration.stopDate,
           configuration.cigaretteType,
           configuration.cigaretteAmount
         )

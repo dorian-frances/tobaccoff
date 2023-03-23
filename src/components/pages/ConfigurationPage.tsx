@@ -17,7 +17,7 @@ import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamLi
 
 const ConfigurationPage = () => {
   const navigation = useNavigation<ConfigurationScreenNavigationProp>();
-  const [dateToSave, getDateToSave] = useState(new Date());
+  const [dateToSave, getDateToSave] = useState(new Date(Date.now()));
   const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
     CigaretteType.INDUSTRIAL
   );

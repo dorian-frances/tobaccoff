@@ -1,0 +1,10 @@
+import { CigaretteType } from './model/configuration.model';
+import { CigaretteData } from './data/cigarette.data';
+
+export class CigaretteUtils {
+  getNumberOfCigarettesPerPack(cigaretteType: CigaretteType) {
+    return cigaretteType === CigaretteType.INDUSTRIAL
+      ? CigaretteData.industrialCigarettePerPacket
+      : CigaretteData.rolledPacketWeight / CigaretteData.rolledCigaretteWeight;
+  }
+}
