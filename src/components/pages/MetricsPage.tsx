@@ -9,28 +9,39 @@ import Restart from '../organisms/Restart';
 import { Configuration } from '../../utils/model/configuration.model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { MetricsScreenNavigationProp } from '../../routes/RootStackParamList';
 import { MetricService } from '../../services/metric.service';
 import { TimeUtils } from '../../utils/time.utils';
 import { CigaretteUtils } from '../../utils/cigarette.utils';
+import DialogResetCounter from '../organisms/DialogResetCounter';
+import { StorageService } from '../../services/storage.service';
 
 const MetricsPage = ({}) => {
+  const storageService = useMemo(() => new StorageService(), []);
+  const metricService = useMemo(
+    () => new MetricService(new TimeUtils(), new CigaretteUtils()),
+    []
+  );
+
   const navigation = useNavigation<MetricsScreenNavigationProp>();
   const [refreshing, setRefreshing] = useState(false);
   const [sinceValue, setSinceValue] = useState('');
   const [totalSavings, setTotalSavings] = useState(0);
   const [monthSavings, setMonthSavings] = useState(0);
   const [lifeDays, setLifeDays] = useState(0);
+  const [showDialog, setShowDialog] = useState(false);
+
+  const toggleDialog = () => setShowDialog(() => !showDialog);
+
+  const resetCounter = useCallback(async () => {
+    await storageService.clearUserData();
+    navigation.navigate('ConfigurationScreen');
+  }, [storageService, navigation]);
 
   const fetchConfigurationData = useCallback(async () => {
-    const metricService = new MetricService(
-      new TimeUtils(),
-      new CigaretteUtils()
-    );
-    const data = await AsyncStorage.getItem('@configuration');
-    if (data !== null) {
-      const configuration = JSON.parse(data) as Configuration;
+    const configuration = await storageService.fetchConfigurationData();
+    if (configuration !== null) {
       setSinceValue(configuration.stopDate);
       setTotalSavings(
         metricService.computeTotalSavings(
@@ -52,11 +63,8 @@ const MetricsPage = ({}) => {
           configuration.cigaretteAmount
         )
       );
-      console.log(
-        `Configuration successfully fetched!\n${JSON.stringify(configuration)}`
-      );
     }
-  }, []);
+  }, [storageService, metricService]);
 
   useEffect(() => {
     fetchConfigurationData();
@@ -141,9 +149,18 @@ const MetricsPage = ({}) => {
           <FailButtons />
         </View>
         <View style={styles.restartStyle}>
-          <Restart />
+          <Restart onPress={toggleDialog} />
         </View>
       </ScrollView>
+      <DialogResetCounter
+        showDialog={showDialog}
+        toggleDialog={toggleDialog}
+        dialogTitle={'Attention'}
+        dialogDescription={
+          'Redémarrer le compteur effacera toutes les données de consommation. Es-tu sûr de vouloir continuer ?'
+        }
+        resetCounter={resetCounter}
+      />
     </SafeAreaView>
   );
 };
