@@ -14,8 +14,10 @@ import {
   Configuration,
 } from '../../utils/model/configuration.model';
 import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
+import { StorageService } from '../../services/storage.service';
 
 const ConfigurationPage = () => {
+  const storageService = new StorageService();
   const navigation = useNavigation<ConfigurationScreenNavigationProp>();
   const [dateToSave, getDateToSave] = useState(new Date(Date.now()));
   const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
@@ -28,26 +30,11 @@ const ConfigurationPage = () => {
     cigaretteType: CigaretteType,
     cigaretteAmount: string
   ) => {
-    try {
-      stopDate.setUTCHours(0, 0, 0);
-      const newConfiguration: Configuration = new Configuration(
-        stopDate.toISOString(),
-        cigaretteType,
-        cigaretteAmount
-      );
-
-      await AsyncStorage.setItem(
-        '@configuration',
-        JSON.stringify(newConfiguration)
-      );
-      console.log(
-        `Configuration ${JSON.stringify(newConfiguration)} successfully saved !`
-      );
-    } catch (error) {
-      console.log(
-        `Error while saving configuration with stopDate ${stopDate}, cigaretteType ${cigaretteType} and cigaretteAmount ${cigaretteAmount}`
-      );
-    }
+    await storageService.saveConfigurationData(
+      stopDate,
+      cigaretteType,
+      cigaretteAmount
+    );
   };
 
   return (

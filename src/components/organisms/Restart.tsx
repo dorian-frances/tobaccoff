@@ -4,11 +4,14 @@ import CircleButton from '../atoms/buttons/CircleButton';
 import SectionText from '../atoms/texts/SectionText';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 
-const Restart = ({}) => {
+type RestartProps = {
+  onPress: () => void;
+};
+const Restart = ({ onPress }: RestartProps) => {
   return (
     <View style={{ alignItems: 'center' }}>
       <View>
-        <CircleButton />
+        <CircleButton onPress={onPress} />
       </View>
       <View style={{ marginTop: 10 }}>
         <SectionText

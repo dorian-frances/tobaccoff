@@ -136,4 +136,24 @@ describe('MetricService', () => {
 
     expect(Math.round(daysSaved * 100) / 100).toEqual(0.08);
   });
+
+  it('should compute non smoked cigarettes for 1 day quit smoking for a 20 cigarette-per-day smoker ', () => {
+    const dateUtils = new TimeUtils();
+    const cigaretteUtils = new CigaretteUtils();
+    const metricService = new MetricService(dateUtils, cigaretteUtils);
+
+    const sinceDate = new Date().toISOString();
+    const cigarettesPerDay = '20.0';
+
+    jest
+      .spyOn(dateUtils, 'getSecondsSinceStopDate')
+      .mockImplementation(() => 24 * 3600);
+
+    const nonSmokedCigarettes = metricService.computeNonSmokedCigarettes(
+      sinceDate,
+      cigarettesPerDay
+    );
+
+    expect(nonSmokedCigarettes).toEqual(parseFloat(cigarettesPerDay));
+  });
 });

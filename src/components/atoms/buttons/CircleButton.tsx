@@ -4,17 +4,34 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-const CircleButton = ({}) => {
+type CircleButtonProps = {
+  onPress: () => void;
+};
+
+const CircleButton = ({ onPress }: CircleButtonProps) => {
   return (
-    <TouchableRipple>
-      <View style={styles.container} testID={'circleButton'}>
-        <Icon
-          name={'restart'}
-          size={40}
-          color={ColorsEnum.INDICATIVE_TEXT_COLOR}
-        />
-      </View>
-    </TouchableRipple>
+    <View
+      style={{
+        borderRadius: 100,
+        elevation: 2,
+      }}
+    >
+      <TouchableRipple
+        onPress={onPress}
+        style={{
+          borderRadius: 100,
+        }}
+        borderless={true}
+      >
+        <View style={styles.container} testID={'circleButton'}>
+          <Icon
+            name={'restart'}
+            size={40}
+            color={ColorsEnum.INDICATIVE_TEXT_COLOR}
+          />
+        </View>
+      </TouchableRipple>
+    </View>
   );
 };
 
