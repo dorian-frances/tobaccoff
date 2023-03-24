@@ -30,6 +30,7 @@ const MetricsPage = ({}) => {
   const [totalSavings, setTotalSavings] = useState(0);
   const [monthSavings, setMonthSavings] = useState(0);
   const [lifeDays, setLifeDays] = useState(0);
+  const [nonSmokedCigarettes, setNonSmokedCigarettes] = useState(0);
   const [showDialog, setShowDialog] = useState(false);
 
   const toggleDialog = () => setShowDialog(() => !showDialog);
@@ -59,6 +60,12 @@ const MetricsPage = ({}) => {
       );
       setLifeDays(
         metricService.computeDaysSaved(
+          configuration.stopDate,
+          configuration.cigaretteAmount
+        )
+      );
+      setNonSmokedCigarettes(
+        metricService.computeNonSmokedCigarettes(
           configuration.stopDate,
           configuration.cigaretteAmount
         )
@@ -121,8 +128,8 @@ const MetricsPage = ({}) => {
           <SecondaryMetrics
             nonSmokedMetricProps={{
               metricTextProps: {
-                metric: 20,
-                formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
+                metric: nonSmokedCigarettes,
+                formatOptions: { style: 'decimal', maximumFractionDigits: 0 },
                 fontSize: 30,
               },
               sectionTextProps: { text: 'Cigarettes non-fumées', fontSize: 13 },

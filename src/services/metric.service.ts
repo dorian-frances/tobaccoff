@@ -73,4 +73,13 @@ export class MetricService {
       (CigaretteData.secondsSavedPerCigarette / 3600.0 / 24)
     );
   }
+
+  computeNonSmokedCigarettes(
+    stopDate: string,
+    cigarettesPerDay: string
+  ): number {
+    const secondsSinceStopDate =
+      this.dateUtils.getSecondsSinceStopDate(stopDate);
+    return (secondsSinceStopDate / 3600.0 / 24) * parseFloat(cigarettesPerDay);
+  }
 }
