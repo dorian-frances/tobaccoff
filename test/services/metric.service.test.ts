@@ -9,7 +9,7 @@ describe('MetricService', () => {
     expect(true).toBeTruthy();
   });
 
-  it('should return total savings equal to one industrial packet price for 1 day stop', () => {
+  it('should return total savings equal to one industrial packet price for 1 day stop and 0 smoked cigarettes', () => {
     // Given
     const sinceDate = new Date(2022, 1, 1).toISOString();
     const cigaretteType = CigaretteType.INDUSTRIAL;
@@ -27,14 +27,15 @@ describe('MetricService', () => {
     const totalSaving = metricService.computeTotalSavings(
       sinceDate,
       cigaretteType,
-      cigaretteAmount
+      cigaretteAmount,
+      []
     );
 
     // Then
     expect(totalSaving).toEqual(CigaretteData.industrialPacketPrice);
   });
 
-  it('should return total savings equal to one rolled packet price for 1 day stop', () => {
+  it('should return total savings equal to one rolled packet price for 1 day stop and 0 smoked cigarettes', () => {
     // Given
     const dateUtils = new TimeUtils();
     const cigaretteUtils = new CigaretteUtils();
@@ -54,14 +55,15 @@ describe('MetricService', () => {
     const totalSaving = metricService.computeTotalSavings(
       sinceDate,
       cigaretteType,
-      cigaretteAmount.toString()
+      cigaretteAmount.toString(),
+      []
     );
 
     // Then
     expect(totalSaving).toEqual(CigaretteData.rolledPacketPrice);
   });
 
-  it('should return month savings equal to one industrial packet price', () => {
+  it('should return month savings equal to one industrial packet price and 0 smoked cigarettes', () => {
     // Given
     const sinceDate = new Date(2022, 1, 1).toISOString();
     const cigaretteType = CigaretteType.INDUSTRIAL;
@@ -81,14 +83,15 @@ describe('MetricService', () => {
     const totalSaving = metricService.computeMonthSavings(
       sinceDate,
       cigaretteType,
-      cigaretteAmount
+      cigaretteAmount,
+      []
     );
 
     // Then
     expect(totalSaving).toEqual(CigaretteData.industrialPacketPrice);
   });
 
-  it('should return month savings equal to one rolled packet price', () => {
+  it('should return month savings equal to one rolled packet price and 0 smoked cigarettes', () => {
     // Given
     const dateUtils = new TimeUtils();
     const cigaretteUtils = new CigaretteUtils();
@@ -110,14 +113,15 @@ describe('MetricService', () => {
     const totalSaving = metricService.computeMonthSavings(
       sinceDate,
       cigaretteType,
-      cigaretteAmount.toString()
+      cigaretteAmount.toString(),
+      []
     );
 
     // Then
     expect(totalSaving).toEqual(CigaretteData.rolledPacketPrice);
   });
 
-  it('should compute days saved for 10 day quit smoking for a 1 cigarette-per-day smoker ', () => {
+  it('should compute days saved for 10 day quit smoking for a 1 cigarette-per-day smoker and 0 smoked cigarettes', () => {
     const dateUtils = new TimeUtils();
     const cigaretteUtils = new CigaretteUtils();
     const metricService = new MetricService(dateUtils, cigaretteUtils);
@@ -131,13 +135,14 @@ describe('MetricService', () => {
 
     const daysSaved = metricService.computeDaysSaved(
       sinceDate,
-      cigarettesPerDay
+      cigarettesPerDay,
+      []
     );
 
     expect(Math.round(daysSaved * 100) / 100).toEqual(0.08);
   });
 
-  it('should compute non smoked cigarettes for 1 day quit smoking for a 20 cigarette-per-day smoker ', () => {
+  it('should compute non smoked cigarettes for 1 day quit smoking for a 20 cigarette-per-day smoker', () => {
     const dateUtils = new TimeUtils();
     const cigaretteUtils = new CigaretteUtils();
     const metricService = new MetricService(dateUtils, cigaretteUtils);

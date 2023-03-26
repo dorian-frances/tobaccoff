@@ -3,6 +3,9 @@ import {
   CigaretteType,
   Configuration,
 } from '../utils/model/configuration.model';
+import { Animated } from 'react-native';
+import { SmokedCigarettes } from '../utils/model/smoked-cigarettes.model';
+import { SmokedCigarette } from '../utils/model/smoked-cigarette.model';
 
 export class StorageService {
   async saveConfigurationData(
@@ -24,7 +27,7 @@ export class StorageService {
       );
     } catch (error) {
       console.log(
-        `Error while saving configuration with stopDate ${stopDate}, cigaretteType ${cigaretteType} and cigaretteAmount ${cigaretteAmount}`
+        `Error while saving @configuration with stopDate ${stopDate}, cigaretteType ${cigaretteType} and cigaretteAmount ${cigaretteAmount}`
       );
     }
   }
@@ -37,7 +40,36 @@ export class StorageService {
       }
       return null;
     } catch (error) {
-      throw new Error(`Error while fetching @Configuration data!\n${error}`);
+      throw new Error(`Error while fetching @configuration data!\n${error}`);
+    }
+  }
+
+  async fetchSmokedCigarettesData(): Promise<SmokedCigarettes> {
+    try {
+      const data = await AsyncStorage.getItem('@smoked-cigarettes');
+      if (data) {
+        return SmokedCigarettes.fromEntityToDomain(
+          JSON.parse(data) as SmokedCigarettes
+        );
+      }
+      return new SmokedCigarettes([]);
+    } catch (error) {
+      throw new Error(
+        `Error while fetching @smoked-cigarettes data!\n${error}`
+      );
+    }
+  }
+
+  async saveSmokedCigarettes(additionalCigaretteAmount: SmokedCigarettes) {
+    try {
+      await AsyncStorage.setItem(
+        '@smoked-cigarettes',
+        JSON.stringify(additionalCigaretteAmount)
+      );
+    } catch (error) {
+      throw new Error(
+        `Error while saving @smoked-cigarette: ${additionalCigaretteAmount}`
+      );
     }
   }
 
@@ -45,7 +77,7 @@ export class StorageService {
     try {
       await AsyncStorage.clear();
     } catch (error: unknown) {
-      console.log(`Error while clearing the data: ${error}`);
+      throw new Error(`Error while clearing the data: ${error}`);
     }
   }
 }

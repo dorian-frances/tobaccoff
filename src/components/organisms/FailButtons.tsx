@@ -4,7 +4,11 @@ import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import React from 'react';
 
-const FailButtons = ({}) => {
+type FailButtonsProps = {
+  addCigaretteOnPress: () => void;
+};
+
+const FailButtons = ({ addCigaretteOnPress }: FailButtonsProps) => {
   return (
     <View>
       <View style={styles.vapotButtonStyle}>
@@ -12,7 +16,7 @@ const FailButtons = ({}) => {
           text={'Je vapote'}
           labelStyle={styles.buttonLabelStyle}
           mode={'elevated'}
-          onPress={() => console.log("'Je vapote' button clicked")}
+          onPress={() => console.log('button clicked')}
         />
       </View>
       <View style={styles.crackButtonStyle}>
@@ -20,7 +24,7 @@ const FailButtons = ({}) => {
           text={"J'ai craqué"}
           labelStyle={styles.buttonLabelStyle}
           mode={'elevated'}
-          onPress={() => console.log("'J'ai craqué' button clicked")}
+          onPress={addCigaretteOnPress}
           buttonColor={ColorsEnum.SECONDARY_COLOR_BUTTON}
         />
       </View>
