@@ -48,7 +48,7 @@ const MetricsPage = ({}) => {
   const resetCounter = useCallback(async () => {
     await globalStorageService.clearAllData();
     navigation.navigate('ConfigurationScreen');
-  }, [configurationService, navigation]);
+  }, [globalStorageService, navigation]);
 
   const toggleAddCigaretteDialog = useCallback(() => {
     setShowAddCigaretteDialog(() => !showAddCigaretteDialog);
