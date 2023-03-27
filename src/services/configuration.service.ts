@@ -4,7 +4,7 @@ import {
   Configuration,
 } from '../utils/model/configuration.model';
 
-export class StorageService {
+export class ConfigurationService {
   async saveConfigurationData(
     stopDate: Date,
     cigaretteType: CigaretteType,
@@ -24,7 +24,7 @@ export class StorageService {
       );
     } catch (error) {
       console.log(
-        `Error while saving configuration with stopDate ${stopDate}, cigaretteType ${cigaretteType} and cigaretteAmount ${cigaretteAmount}`
+        `Error while saving @configuration with stopDate ${stopDate}, cigaretteType ${cigaretteType} and cigaretteAmount ${cigaretteAmount}`
       );
     }
   }
@@ -37,15 +37,7 @@ export class StorageService {
       }
       return null;
     } catch (error) {
-      throw new Error(`Error while fetching @Configuration data!\n${error}`);
-    }
-  }
-
-  async clearUserData() {
-    try {
-      await AsyncStorage.clear();
-    } catch (error: unknown) {
-      console.log(`Error while clearing the data: ${error}`);
+      throw new Error(`Error while fetching @configuration data!\n${error}`);
     }
   }
 }

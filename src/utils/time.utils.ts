@@ -16,7 +16,7 @@ export class TimeUtils {
   };
 
   public getSecondsSinceStopDate = (sinceDate: string) => {
-    return (new Date().getTime() - Date.parse(sinceDate)) / 1000;
+    return (new Date().getTime() - new Date(sinceDate).getTime()) / 1000;
   };
 
   private isStopDateInCurrentMonth(sinceDate: string, nowDate: Date) {

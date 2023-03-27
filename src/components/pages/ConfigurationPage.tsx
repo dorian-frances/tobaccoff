@@ -14,10 +14,10 @@ import {
   Configuration,
 } from '../../utils/model/configuration.model';
 import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
-import { StorageService } from '../../services/storage.service';
+import { ConfigurationService } from '../../services/configuration.service';
 
 const ConfigurationPage = () => {
-  const storageService = new StorageService();
+  const storageService = new ConfigurationService();
   const navigation = useNavigation<ConfigurationScreenNavigationProp>();
   const [dateToSave, getDateToSave] = useState(new Date(Date.now()));
   const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
