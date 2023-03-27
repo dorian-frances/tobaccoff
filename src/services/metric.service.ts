@@ -40,10 +40,8 @@ export class MetricService {
     }
     const lostSavingsForSmokedCigarettes =
       this.computeLostSavingsForSmokedCigarettes(
-        CigaretteData.industrialPacketPrice,
-        this.cigaretteUtils.getNumberOfCigarettesPerPack(
-          CigaretteType.INDUSTRIAL
-        ),
+        CigaretteData.rolledPacketPrice,
+        this.cigaretteUtils.getNumberOfCigarettesPerPack(CigaretteType.ROLLED),
         smokedCigarettes
       );
     return (

@@ -13,15 +13,20 @@ import { MetricService } from '../../services/metric.service';
 import { TimeUtils } from '../../utils/time.utils';
 import { CigaretteUtils } from '../../utils/cigarette.utils';
 import DialogResetCounter from '../organisms/DialogResetCounter';
-import { StorageService } from '../../services/storage.service';
+import { ConfigurationService } from '../../services/configuration.service';
 import DialogAddCigarette from '../organisms/DialogAddCigarette';
 import { SmokedCigarettes } from '../../utils/model/smoked-cigarettes.model';
 import { SmokedCigarette } from '../../utils/model/smoked-cigarette.model';
-import { Configuration } from '../../utils/model/configuration.model';
-import { Metrics } from '../../utils/model/metrics.model';
+import { SmokedCigarettesService } from '../../services/smoked-cigarettes.service';
+import { GlobalStorageService } from '../../services/global-storage.service';
 
 const MetricsPage = ({}) => {
-  const storageService = useMemo(() => new StorageService(), []);
+  const configurationService = useMemo(() => new ConfigurationService(), []);
+  const smokedCigarettesService = useMemo(
+    () => new SmokedCigarettesService(),
+    []
+  );
+  const globalStorageService = useMemo(() => new GlobalStorageService(), []);
   const metricService = useMemo(
     () => new MetricService(new TimeUtils(), new CigaretteUtils()),
     []
@@ -41,9 +46,9 @@ const MetricsPage = ({}) => {
   const toggleResetDialog = () => setShowResetDialog(() => !showResetDialog);
 
   const resetCounter = useCallback(async () => {
-    await storageService.clearUserData();
+    await globalStorageService.clearAllData();
     navigation.navigate('ConfigurationScreen');
-  }, [storageService, navigation]);
+  }, [configurationService, navigation]);
 
   const toggleAddCigaretteDialog = useCallback(() => {
     setShowAddCigaretteDialog(() => !showAddCigaretteDialog);
@@ -56,9 +61,9 @@ const MetricsPage = ({}) => {
       today.getUTCMonth(),
       1
     );
-    const configuration = await storageService.fetchConfigurationData();
+    const configuration = await configurationService.fetchConfigurationData();
     const persistedSmokedCigarettes: SmokedCigarettes =
-      await storageService.fetchSmokedCigarettesData();
+      await smokedCigarettesService.fetchSmokedCigarettesData();
     if (configuration !== null) {
       setSinceValue(configuration.stopDate);
       setTotalSavings(
@@ -99,24 +104,26 @@ const MetricsPage = ({}) => {
           .reduce((sum, nexValue) => sum + nexValue, 0)
       );
     }
-  }, [storageService, metricService]);
+  }, [configurationService, metricService, smokedCigarettesService]);
 
   const saveSmokedCigarettes = useCallback(
     async (sliderValue: number) => {
       const persistedSmokedCigarettes: SmokedCigarettes =
-        await storageService.fetchSmokedCigarettesData();
+        await smokedCigarettesService.fetchSmokedCigarettesData();
       persistedSmokedCigarettes.smokedCigarettes.push(
         new SmokedCigarette(sliderValue, new Date())
       );
       const updatedSmokedCigarettes: SmokedCigarettes = new SmokedCigarettes(
         persistedSmokedCigarettes.smokedCigarettes
       );
-      await storageService.saveSmokedCigarettes(updatedSmokedCigarettes);
+      await smokedCigarettesService.saveSmokedCigarettes(
+        updatedSmokedCigarettes
+      );
       toggleAddCigaretteDialog();
       await fetchConfigurationAndDisplayMetrics();
     },
     [
-      storageService,
+      smokedCigarettesService,
       toggleAddCigaretteDialog,
       fetchConfigurationAndDisplayMetrics,
     ]
