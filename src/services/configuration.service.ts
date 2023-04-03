@@ -1,8 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  CigaretteType,
-  Configuration,
-} from '../utils/model/configuration.model';
+import { CigaretteType, Configuration } from '../model/configuration.model';
 
 export class ConfigurationService {
   async saveConfigurationData(

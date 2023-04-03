@@ -1,24 +1,24 @@
 import {
   CigaretteType,
   Configuration,
-} from '../../src/utils/model/configuration.model';
+} from '../../src/model/configuration.model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { GlobalStorageService } from '../../src/services/global-storage.service';
 import { ConfigurationService } from '../../src/services/configuration.service';
-import { SmokedCigarettesService } from '../../src/services/smoked-cigarettes.service';
-import { SmokedCigarettes } from '../../src/utils/model/smoked-cigarettes.model';
-import { SmokedCigarette } from '../../src/utils/model/smoked-cigarette.model';
+import { SmokedCigaretteService } from '../../src/services/smoked-cigarette.service';
+import { SmokedCigarettes } from '../../src/model/smoked-cigarettes.model';
+import { SmokedCigarette } from '../../src/model/smoked-cigarette.model';
 import { faker } from '@faker-js/faker';
 
 describe('GlobalStorageService', () => {
   let globalStorageService: GlobalStorageService;
   let configurationService: ConfigurationService;
-  let smokedCigarettesService: SmokedCigarettesService;
+  let smokedCigarettesService: SmokedCigaretteService;
 
   beforeAll(async () => {
     globalStorageService = new GlobalStorageService();
     configurationService = new ConfigurationService();
-    smokedCigarettesService = new SmokedCigarettesService();
+    smokedCigarettesService = new SmokedCigaretteService();
     await AsyncStorage.clear();
   });
   describe('clearAllData', () => {

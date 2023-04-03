@@ -15,17 +15,22 @@ import { CigaretteUtils } from '../../utils/cigarette.utils';
 import DialogResetCounter from '../organisms/DialogResetCounter';
 import { ConfigurationService } from '../../services/configuration.service';
 import DialogAddCigarette from '../organisms/DialogAddCigarette';
-import { SmokedCigarettes } from '../../utils/model/smoked-cigarettes.model';
-import { SmokedCigarette } from '../../utils/model/smoked-cigarette.model';
-import { SmokedCigarettesService } from '../../services/smoked-cigarettes.service';
+import { SmokedCigarettes } from '../../model/smoked-cigarettes.model';
+import { SmokedCigarette } from '../../model/smoked-cigarette.model';
+import { SmokedCigaretteService } from '../../services/smoked-cigarette.service';
 import { GlobalStorageService } from '../../services/global-storage.service';
+import DialogAddVapeExpense from '../organisms/DialogAddVapeExpense';
+import { VapeExpenses } from '../../model/vape-expenses.model';
+import { VapeExpenseService } from '../../services/vape-expense.service';
+import { VapeExpense } from '../../model/vape-expense.model';
 
 const MetricsPage = ({}) => {
   const configurationService = useMemo(() => new ConfigurationService(), []);
   const smokedCigarettesService = useMemo(
-    () => new SmokedCigarettesService(),
+    () => new SmokedCigaretteService(),
     []
   );
+  const vapeExpenseService = useMemo(() => new VapeExpenseService(), []);
   const globalStorageService = useMemo(() => new GlobalStorageService(), []);
   const metricService = useMemo(
     () => new MetricService(new TimeUtils(), new CigaretteUtils()),
@@ -42,6 +47,8 @@ const MetricsPage = ({}) => {
   const [smokedCigarettes, setSmokedCigarettes] = useState(0);
   const [showResetDialog, setShowResetDialog] = useState(false);
   const [showAddCigaretteDialog, setShowAddCigaretteDialog] = useState(false);
+  const [showAddVapeExpenseDialog, setShowAddVapeExpenseDialog] =
+    useState(false);
 
   const toggleResetDialog = () => setShowResetDialog(() => !showResetDialog);
 
@@ -54,6 +61,10 @@ const MetricsPage = ({}) => {
     setShowAddCigaretteDialog(() => !showAddCigaretteDialog);
   }, [showAddCigaretteDialog]);
 
+  const toggleAddVapeExpenseDialog = useCallback(() => {
+    setShowAddVapeExpenseDialog(() => !showAddVapeExpenseDialog);
+  }, [showAddVapeExpenseDialog]);
+
   const fetchConfigurationAndDisplayMetrics = useCallback(async () => {
     const today: Date = new Date();
     const beginningOfTheMonth: Date = new Date(
@@ -64,6 +75,8 @@ const MetricsPage = ({}) => {
     const configuration = await configurationService.fetchConfigurationData();
     const persistedSmokedCigarettes: SmokedCigarettes =
       await smokedCigarettesService.fetchSmokedCigarettesData();
+    const persistedVapeExpenses: VapeExpenses =
+      await vapeExpenseService.fetchVapeExpensesData();
     if (configuration !== null) {
       setSinceValue(configuration.stopDate);
       setTotalSavings(
@@ -71,7 +84,8 @@ const MetricsPage = ({}) => {
           configuration.stopDate,
           configuration.cigaretteType,
           configuration.cigaretteAmount,
-          persistedSmokedCigarettes.smokedCigarettes
+          persistedSmokedCigarettes.smokedCigarettes,
+          persistedVapeExpenses.vapeExpenses
         )
       );
       setMonthSavings(
@@ -82,6 +96,10 @@ const MetricsPage = ({}) => {
           persistedSmokedCigarettes.smokedCigarettes.filter(
             (smokedCigarette) =>
               smokedCigarette.date.getTime() > beginningOfTheMonth.getTime()
+          ),
+          persistedVapeExpenses.vapeExpenses.filter(
+            (vapeExpense) =>
+              vapeExpense.date.getTime() > beginningOfTheMonth.getTime()
           )
         )
       );
@@ -104,7 +122,12 @@ const MetricsPage = ({}) => {
           .reduce((sum, nexValue) => sum + nexValue, 0)
       );
     }
-  }, [configurationService, metricService, smokedCigarettesService]);
+  }, [
+    configurationService,
+    metricService,
+    smokedCigarettesService,
+    vapeExpenseService,
+  ]);
 
   const saveSmokedCigarettes = useCallback(
     async (sliderValue: number) => {
@@ -125,6 +148,27 @@ const MetricsPage = ({}) => {
     [
       smokedCigarettesService,
       toggleAddCigaretteDialog,
+      fetchConfigurationAndDisplayMetrics,
+    ]
+  );
+
+  const saveVapeExpense = useCallback(
+    async (vapeExpense: string) => {
+      const persistedVapeExpenses: VapeExpenses =
+        await vapeExpenseService.fetchVapeExpensesData();
+      persistedVapeExpenses.vapeExpenses.push(
+        new VapeExpense(parseFloat(vapeExpense), new Date())
+      );
+      const updatedVapeExpenses: VapeExpenses = new VapeExpenses(
+        persistedVapeExpenses.vapeExpenses
+      );
+      await vapeExpenseService.saveVapeExpenses(updatedVapeExpenses);
+      toggleAddVapeExpenseDialog();
+      await fetchConfigurationAndDisplayMetrics();
+    },
+    [
+      vapeExpenseService,
+      toggleAddVapeExpenseDialog,
       fetchConfigurationAndDisplayMetrics,
     ]
   );
@@ -209,7 +253,10 @@ const MetricsPage = ({}) => {
           />
         </View>
         <View style={styles.failButtonsStyle}>
-          <FailButtons addCigaretteOnPress={toggleAddCigaretteDialog} />
+          <FailButtons
+            addCigaretteOnPress={toggleAddCigaretteDialog}
+            addVapeExpenseOnPress={toggleAddVapeExpenseDialog}
+          />
         </View>
         <View style={styles.restartStyle}>
           <Restart onPress={toggleResetDialog} />
@@ -234,6 +281,12 @@ const MetricsPage = ({}) => {
         maximumSlider={30}
         stepSlider={1}
         defaultValue={5}
+      />
+      <DialogAddVapeExpense
+        dialogTitle={'Dépenses'}
+        toggleDialog={toggleAddVapeExpenseDialog}
+        onValidate={saveVapeExpense}
+        showDialog={showAddVapeExpenseDialog}
       />
     </SafeAreaView>
   );

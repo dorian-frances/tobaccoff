@@ -1,4 +1,4 @@
-import { CigaretteType } from './model/configuration.model';
+import { CigaretteType } from '../model/configuration.model';
 import { CigaretteData } from './data/cigarette.data';
 
 export class CigaretteUtils {

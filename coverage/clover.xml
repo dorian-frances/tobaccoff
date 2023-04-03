@@ -56,7 +56,7 @@
         <line num="151" count="0" type="stmt"/>
         <line num="152" count="1" type="stmt"/>
       </file>
-      <file name="smoked-cigarettes.service.ts" path="/Users/dorianfrances/Projects/personal/tobaccoff/src/services/smoked-cigarettes.service.ts">
+      <file name="smoked-cigarette.service.ts" path="/Users/dorianfrances/Projects/personal/tobaccoff/src/services/smoked-cigarette.service.ts">
         <metrics statements="9" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>

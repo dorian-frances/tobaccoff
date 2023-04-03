@@ -1,8 +1,9 @@
-import { CigaretteType } from '../utils/model/configuration.model';
+import { CigaretteType } from '../model/configuration.model';
 import { CigaretteData } from '../utils/data/cigarette.data';
 import { TimeUtils } from '../utils/time.utils';
 import { CigaretteUtils } from '../utils/cigarette.utils';
-import { SmokedCigarette } from '../utils/model/smoked-cigarette.model';
+import { SmokedCigarette } from '../model/smoked-cigarette.model';
+import { VapeExpense } from '../model/vape-expense.model';
 
 export class MetricService {
   constructor(
@@ -14,10 +15,13 @@ export class MetricService {
     sinceDate: string,
     cigaretteType: CigaretteType,
     cigarettesPerDay: string,
-    smokedCigarettes: SmokedCigarette[]
+    smokedCigarettes: SmokedCigarette[],
+    vapeExpenses: VapeExpense[]
   ): number => {
     const secondsSinceStopDate =
       this.dateUtils.getSecondsSinceStopDate(sinceDate);
+    const lostSavingsForVapeExpenses =
+      this.computeLostSavingsForVapeExpenses(vapeExpenses);
     if (cigaretteType === CigaretteType.INDUSTRIAL) {
       const lostSavingsForSmokedCigarettes =
         this.computeLostSavingsForSmokedCigarettes(
@@ -27,6 +31,7 @@ export class MetricService {
           ),
           smokedCigarettes
         );
+
       return (
         (secondsSinceStopDate *
           ((CigaretteData.industrialPacketPrice *
@@ -35,9 +40,11 @@ export class MetricService {
               CigaretteType.INDUSTRIAL
             ))) /
           (24.0 * 3600) -
-        lostSavingsForSmokedCigarettes
+        lostSavingsForSmokedCigarettes -
+        lostSavingsForVapeExpenses
       );
     }
+
     const lostSavingsForSmokedCigarettes =
       this.computeLostSavingsForSmokedCigarettes(
         CigaretteData.rolledPacketPrice,
@@ -50,7 +57,8 @@ export class MetricService {
         parseFloat(cigarettesPerDay)) /
         this.cigaretteUtils.getNumberOfCigarettesPerPack(CigaretteType.ROLLED) /
         (24.0 * 3600) -
-      lostSavingsForSmokedCigarettes
+      lostSavingsForSmokedCigarettes -
+      lostSavingsForVapeExpenses
     );
   };
 
@@ -58,10 +66,13 @@ export class MetricService {
     sinceDate: string,
     cigaretteType: CigaretteType,
     cigarettesPerDay: string,
-    smokedCigarettesInMonth: SmokedCigarette[]
+    smokedCigarettesInMonth: SmokedCigarette[],
+    vapeExpensesInMonth: VapeExpense[]
   ) => {
     const secondsSinceBeginningOfTheMonth =
       this.dateUtils.getSecondsSinceBeginningOfTheMonth(sinceDate);
+    const lostSavingsForVapeExpenses =
+      this.computeLostSavingsForVapeExpenses(vapeExpensesInMonth);
     if (cigaretteType === CigaretteType.INDUSTRIAL) {
       const lostSavingsForSmokedCigarettes =
         this.computeLostSavingsForSmokedCigarettes(
@@ -77,7 +88,8 @@ export class MetricService {
             parseFloat(cigarettesPerDay)) /
             CigaretteData.industrialCigarettePerPacket)) /
           (24.0 * 3600) -
-        lostSavingsForSmokedCigarettes
+        lostSavingsForSmokedCigarettes -
+        lostSavingsForVapeExpenses
       );
     }
 
@@ -96,7 +108,8 @@ export class MetricService {
         CigaretteData.rolledCigaretteWeight) /
         CigaretteData.rolledPacketWeight /
         (24.0 * 3600) -
-      lostSavingsForSmokedCigarettes
+      lostSavingsForSmokedCigarettes -
+      lostSavingsForVapeExpenses
     );
   };
 
@@ -154,5 +167,11 @@ export class MetricService {
       3600.0 /
       24
     );
+  }
+
+  private computeLostSavingsForVapeExpenses(vapeExpenses: VapeExpense[]) {
+    return vapeExpenses
+      .map((vapeExpense) => vapeExpense.value)
+      .reduce((sum, value) => sum + value, 0);
   }
 }

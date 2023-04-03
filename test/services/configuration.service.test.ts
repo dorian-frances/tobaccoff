@@ -1,7 +1,7 @@
 import {
   CigaretteType,
   Configuration,
-} from '../../src/utils/model/configuration.model';
+} from '../../src/model/configuration.model';
 import { faker } from '@faker-js/faker';
 import { ConfigurationService } from '../../src/services/configuration.service';
 import AsyncStorage from '@react-native-async-storage/async-storage';

@@ -105,7 +105,7 @@ BRF:6
 BRH:5
 end_of_record
 TN:
-SF:src/services/smoked-cigarettes.service.ts
+SF:src/services/smoked-cigarette.service.ts
 FN:5,(anonymous_0)
 FN:18,(anonymous_1)
 FNF:2
