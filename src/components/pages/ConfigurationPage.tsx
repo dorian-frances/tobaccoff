@@ -5,34 +5,23 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ClassicButton from '../atoms/buttons/ClassicButton';
 import HeaderText from '../atoms/texts/HeaderText';
 import StopDateConfiguration from '../organisms/StopDateConfiguration';
-import { useNavigation } from '@react-navigation/native';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { CigaretteType, Configuration } from '../../model/configuration.model';
-import { ConfigurationScreenNavigationProp } from '../../routes/RootStackParamList';
-import { ConfigurationService } from '../../services/configuration.service';
+import { CigaretteType } from '../../model/configuration.model';
+import { ConfigurationScreenNavigationProp } from '../../stack/NativeStack';
+import { useConfiguration } from '../../hooks/UseConfiguration';
 
-const ConfigurationPage = () => {
-  const storageService = new ConfigurationService();
-  const navigation = useNavigation<ConfigurationScreenNavigationProp>();
+type Props = {
+  navigation: ConfigurationScreenNavigationProp;
+};
+
+const ConfigurationPage = ({ navigation }: Props) => {
+  const configurationContextData = useConfiguration();
   const [dateToSave, getDateToSave] = useState(new Date(Date.now()));
   const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
     CigaretteType.INDUSTRIAL
   );
   const [cigaretteAmountToSave, setCigaretteAmountToSave] = useState('');
-
-  const saveConfiguration = async (
-    stopDate: Date,
-    cigaretteType: CigaretteType,
-    cigaretteAmount: string
-  ) => {
-    await storageService.saveConfigurationData(
-      stopDate,
-      cigaretteType,
-      cigaretteAmount
-    );
-  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -61,14 +50,13 @@ const ConfigurationPage = () => {
           mode={'elevated'}
           text={'Valider'}
           labelStyle={styles.validateButtonLabelStyle}
-          onPress={async () => {
-            await saveConfiguration(
+          onPress={() =>
+            configurationContextData.saveConfiguration(
               dateToSave,
               cigaretteTypeToSave,
               cigaretteAmountToSave
-            );
-            navigation.navigate('MetricsScreen');
-          }}
+            )
+          }
         />
       </View>
     </SafeAreaView>
