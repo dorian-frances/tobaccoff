@@ -24,7 +24,7 @@ const DialogResetCounter = ({
         <Dialog.Icon icon="alert" size={40} />
         <Dialog.Title style={styles.title}>{dialogTitle}</Dialog.Title>
         <Dialog.Content>
-          <Text style={styles.description}>{dialogDescription}</Text>
+          <Text style={styles.textInput}>{dialogDescription}</Text>
         </Dialog.Content>
         <Dialog.Actions>
           <Button onPress={toggleDialog}>Cancel</Button>
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },
-  description: {
+  textInput: {
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },

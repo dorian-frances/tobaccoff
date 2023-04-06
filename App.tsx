@@ -1,12 +1,13 @@
-import { Provider as PaperProvider } from 'react-native-paper';
-import React from 'react';
+import {
+  configureFonts,
+  Provider as PaperProvider,
+  useTheme,
+} from 'react-native-paper';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useFonts } from 'expo-font';
 import { fr, registerTranslation } from 'react-native-paper-dates';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ConfigurationPage from './src/components/pages/ConfigurationPage';
-import { NavigationContainer } from '@react-navigation/native';
-import MetricsPage from './src/components/pages/MetricsPage';
-import { RootStackParamList } from './src/routes/RootStackParamList';
+import { ConfigurationProvider } from './src/context/ConfigurationContext';
+import { Router } from './src/routes/Router';
 
 registerTranslation('fr-FR', fr);
 
@@ -19,26 +20,37 @@ const App = () => {
     'Montserrat-ExtraBold': require('./src/assets/fonts/Montserrat-ExtraBold.ttf'),
   });
 
+  const baseFonts = {
+    fontFamily: 'Montserrat-Medium',
+  } as const;
+
+  const baseVariants = configureFonts({ config: baseFonts });
+
+  const customVariants = {
+    bold: {
+      ...baseVariants.bodyMedium,
+      fontFamily: 'Montserrat-Bold',
+    },
+  } as const;
+
+  const fonts = configureFonts({
+    config: {
+      ...baseFonts,
+      ...customVariants,
+    },
+  });
+
+  const theme = useTheme();
+
   if (!fontLoaded) {
     return null;
   }
 
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="ConfigurationScreen"
-          screenOptions={{ headerShown: false }}
-        >
-          <Stack.Screen
-            name="ConfigurationScreen"
-            component={ConfigurationPage}
-          />
-          <Stack.Screen name="MetricsScreen" component={MetricsPage} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <PaperProvider theme={{ ...theme, fonts }}>
+      <ConfigurationProvider>
+        <Router />
+      </ConfigurationProvider>
     </PaperProvider>
   );
 };

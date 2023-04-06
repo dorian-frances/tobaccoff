@@ -6,9 +6,13 @@ import React from 'react';
 
 type FailButtonsProps = {
   addCigaretteOnPress: () => void;
+  addVapeExpenseOnPress: () => void;
 };
 
-const FailButtons = ({ addCigaretteOnPress }: FailButtonsProps) => {
+const FailButtons = ({
+  addCigaretteOnPress,
+  addVapeExpenseOnPress,
+}: FailButtonsProps) => {
   return (
     <View>
       <View style={styles.vapotButtonStyle}>
@@ -16,7 +20,7 @@ const FailButtons = ({ addCigaretteOnPress }: FailButtonsProps) => {
           text={'Je vapote'}
           labelStyle={styles.buttonLabelStyle}
           mode={'elevated'}
-          onPress={() => console.log('button clicked')}
+          onPress={addVapeExpenseOnPress}
         />
       </View>
       <View style={styles.crackButtonStyle}>

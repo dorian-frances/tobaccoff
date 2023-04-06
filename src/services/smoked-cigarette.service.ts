@@ -1,7 +1,7 @@
-import { SmokedCigarettes } from '../utils/model/smoked-cigarettes.model';
+import { SmokedCigarettes } from '../model/smoked-cigarettes.model';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export class SmokedCigarettesService {
+export class SmokedCigaretteService {
   async saveSmokedCigarettes(additionalCigaretteAmount: SmokedCigarettes) {
     try {
       await AsyncStorage.setItem(

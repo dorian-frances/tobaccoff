@@ -1,16 +1,22 @@
-import { SmokedCigarettesService } from '../../src/services/smoked-cigarettes.service';
-import { ConfigurationService } from '../../src/services/configuration.service';
+import { SmokedCigaretteService } from '../../src/services/smoked-cigarette.service';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { SmokedCigarettes } from '../../src/utils/model/smoked-cigarettes.model';
-import { SmokedCigarette } from '../../src/utils/model/smoked-cigarette.model';
+import { SmokedCigarettes } from '../../src/model/smoked-cigarettes.model';
+import { SmokedCigarette } from '../../src/model/smoked-cigarette.model';
 import { faker } from '@faker-js/faker';
+import SpyInstance = jest.SpyInstance;
 
 describe('SmokedCigarettesService', () => {
-  let smokedCigarettesService: SmokedCigarettesService;
+  let smokedCigarettesService: SmokedCigaretteService;
+  let asyncStorageSetItemSpy: SpyInstance;
 
   beforeEach(async () => {
-    smokedCigarettesService = new SmokedCigarettesService();
+    smokedCigarettesService = new SmokedCigaretteService();
     await AsyncStorage.clear();
+    asyncStorageSetItemSpy = jest.spyOn(AsyncStorage, 'setItem');
+  });
+
+  afterEach(() => {
+    asyncStorageSetItemSpy.mockRestore();
   });
 
   describe('fetchSmokedCigarettes', () => {
@@ -60,13 +66,11 @@ describe('SmokedCigarettesService', () => {
         ),
       ]);
 
-      const spy = jest.spyOn(AsyncStorage, 'setItem');
-
       // When
       await smokedCigarettesService.saveSmokedCigarettes(smokedCigarettes);
 
       // Then
-      expect(spy).toBeCalledWith(
+      expect(asyncStorageSetItemSpy).toBeCalledWith(
         '@smoked-cigarettes',
         JSON.stringify(smokedCigarettes)
       );

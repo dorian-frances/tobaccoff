@@ -37,8 +37,8 @@ const DialogAddCigarette = ({
         <Dialog.Icon icon="emoticon-sad-outline" size={40} />
         <Dialog.Title style={styles.title}>{dialogTitle}</Dialog.Title>
         <Dialog.Content>
-          <Text style={styles.description}>{sliderText}</Text>
-          <Text style={styles.cigaretteAmount}>{value}</Text>
+          <Text style={styles.textInput}>{sliderText}</Text>
+          <Text style={styles.vapeExpense}>{value}</Text>
         </Dialog.Content>
         <Dialog.Actions>
           <Slider
@@ -67,11 +67,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },
-  description: {
+  textInput: {
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },
-  cigaretteAmount: {
+  vapeExpense: {
     textAlign: 'center',
     fontFamily: FontsEnum.BOLD,
     fontSize: 20,
