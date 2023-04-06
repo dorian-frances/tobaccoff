@@ -4,12 +4,13 @@ import { Stack } from '../stack/NativeStack';
 import MetricsPage from '../components/pages/MetricsPage';
 import ConfigurationPage from '../components/pages/ConfigurationPage';
 import { NavigationContainer } from '@react-navigation/native';
+import LoadingPage from '../components/pages/LoadingPage';
 
 export const Router = () => {
   const { configurationData, loading } = useConfiguration();
 
   if (loading) {
-    return null;
+    return <LoadingPage />;
   }
 
   return (
