@@ -1,28 +1,51 @@
 version: 2.1
 jobs:
-  react-native-test:
+  install:
+    working_directory: ~/tobaccoff
     docker:
       - image: cimg/node:16.15.1
-
     steps:
       - checkout
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "~/tobaccoff/yarn.lock" }}
       - run:
           name: Install dependencies
           command: yarn install
+      - checkout # Checking out code in case of a yarn values-version mismatch modifies the yarn.lock
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ checksum "~/tobaccoff/yarn.lock" }}
           paths:
-            - ./node_modules
+            - node_modules
+  lint:
+    working_directory: ~/tobaccoff
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "~/tobaccoff/yarn.lock" }}
       - run:
-          name: ESLint
+          name: Lint
           command: yarn lint
+  test:
+    working_directory: ~/tobaccoff
+    docker:
+      - image: cimg/node:16.15.1
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "~/tobaccoff/yarn.lock" }}
       - run:
-          name: Run tests
+          name: Tests
           command: yarn test
 
 workflows:
-  react-native-test:
+  ci:
     jobs:
-      - react-native-test
+      - install
+      - lint:
+          requires:
+            - install
+      - test:
+          requires:
+            - install
