@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tobaccoff",
+    "name": "Tobaccoff",
     "slug": "tobaccoff",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,12 +19,20 @@
     },
     "android": {
       "adaptiveIcon": {
+        "package": "com.tobaccoff",
+        "versionCode": 1,
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dfrances.dev.tobaccoff"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "62f2d062-c51d-43f6-8f58-36f16077460d"
+      }
     }
   }
 }

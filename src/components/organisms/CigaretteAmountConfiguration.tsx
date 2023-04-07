@@ -30,7 +30,7 @@ const CigaretteAmountConfiguration = ({
         <InputText
           label={'Cigarettes / jour'}
           rightText={'/jour'}
-          getCigaretteAmount={(cigaretteAmount: string) => {
+          getValue={(cigaretteAmount: string) => {
             getCigaretteAmount(cigaretteAmount);
           }}
           placeholder={'Nombre de cigarettes'}
