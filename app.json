@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "tobacoff",
-    "slug": "tobacoff",
+    "name": "Tobaccoff",
+    "slug": "tobaccoff",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./src/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,12 +19,20 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "package": "com.tobaccoff",
+        "versionCode": 1,
+        "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dfrances.dev.tobaccoff"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./src/assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "62f2d062-c51d-43f6-8f58-36f16077460d"
+      }
     }
   }
 }
