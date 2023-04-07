@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     fontFamily: FontsEnum.SEMI_BOLD,
-    fontSize: 30,
+    fontSize: 25,
   },
   textInput: {
     fontSize: 60,

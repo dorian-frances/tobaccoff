@@ -70,19 +70,23 @@ const styles = StyleSheet.create({
     backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
   },
   headerStyle: {
-    marginTop: 40,
+    flex: 2,
+    justifyContent: 'center',
   },
   stopDateConfigurationStyle: {
     width: '80%',
-    marginTop: 50,
-    marginBottom: 50,
+    flex: 2,
+    justifyContent: 'center',
   },
   cigaretteAmountConfigurationStyle: {
     width: '80%',
+    flex: 3,
+    justifyContent: 'center',
   },
   validateButtonContainerStyle: {
     width: '80%',
-    marginTop: 110,
+    flex: 4,
+    justifyContent: 'center',
   },
   validateButtonLabelStyle: {
     fontFamily: FontsEnum.BOLD,

@@ -20,9 +20,6 @@ const PrimaryMetrics = ({
       <View style={styles.monthlySavingsStyle}>
         <PrimaryMetric {...monthlySavingsProps} />
       </View>
-      <View style={styles.dividerStyle}>
-        <Divider />
-      </View>
     </View>
   );
 };

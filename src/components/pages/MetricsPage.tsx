@@ -22,6 +22,7 @@ import { VapeExpense } from '../../model/vape-expense.model';
 import { Configuration } from '../../model/configuration.model';
 import { MetricsScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
+import Divider from '../atoms/dividers/Divider';
 
 type Props = {
   navigation: MetricsScreenNavigationProp;
@@ -68,6 +69,7 @@ const MetricsPage = ({ navigation }: Props) => {
 
   const computeAndDisplayMetrics = useCallback(
     async (configuration: Configuration | null) => {
+      console.log(configuration);
       const today: Date = new Date();
       const beginningOfTheMonth: Date = new Date(
         today.getUTCFullYear(),
@@ -224,6 +226,9 @@ const MetricsPage = ({ navigation }: Props) => {
             }}
           />
         </View>
+        <View style={styles.dividerStyle}>
+          <Divider />
+        </View>
         <View style={styles.secondaryMetricsStyle}>
           <SecondaryMetrics
             nonSmokedMetricProps={{
@@ -286,7 +291,7 @@ const MetricsPage = ({ navigation }: Props) => {
         defaultValue={5}
       />
       <DialogAddVapeExpense
-        dialogTitle={'Dépenses'}
+        dialogTitle={'Dépenses de vapotage'}
         toggleDialog={toggleAddVapeExpenseDialog}
         onValidate={saveVapeExpense}
         showDialog={showAddVapeExpenseDialog}
@@ -301,32 +306,43 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
   },
-  restartStyle: {
-    width: '80%',
-    marginTop: 40,
-  },
+
   scrollViewStyle: {
-    flex: 1,
     width: '100%',
   },
   contentScrollViewStyle: {
+    flex: 1,
     alignItems: 'center',
   },
   headerStyle: {
     width: '80%',
-    marginTop: 60,
+    flex: 1,
+    justifyContent: 'center',
   },
   savingsStyle: {
     width: '80%',
-    marginTop: 30,
+    flex: 4,
+    justifyContent: 'center',
+  },
+  dividerStyle: {
+    width: '80%',
+    flex: 1,
+    justifyContent: 'center',
   },
   secondaryMetricsStyle: {
     width: '80%',
-    marginTop: 30,
+    flex: 3,
+    justifyContent: 'center',
   },
   failButtonsStyle: {
     width: '80%',
-    marginTop: 40,
+    flex: 3,
+    justifyContent: 'center',
+  },
+  restartStyle: {
+    width: '80%',
+    flex: 3,
+    justifyContent: 'center',
   },
 });
 
