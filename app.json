@@ -24,7 +24,7 @@
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dfrances.dev.tobaccoff"
+      "package": "com.dev.dfrances.tobaccoff"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"
