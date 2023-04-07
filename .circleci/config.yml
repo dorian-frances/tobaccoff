@@ -27,17 +27,6 @@ jobs:
       - run:
           name: Lint
           command: yarn lint
-  build:
-    working_directory: ~/tobaccoff
-    docker:
-      - image: cimg/node:16.15.1
-    steps:
-      - checkout
-      - restore_cache:
-          key: dependency-cache-{{ checksum "~/tobaccoff/yarn.lock" }}
-      - run:
-          name: Build
-          command: yarn build
   test:
     working_directory: ~/tobaccoff
     docker:
@@ -54,9 +43,6 @@ workflows:
     jobs:
       - install
       - lint:
-          requires:
-            - install
-      - build:
           requires:
             - install
       - test:
