@@ -69,7 +69,6 @@ const MetricsPage = ({ navigation }: Props) => {
 
   const computeAndDisplayMetrics = useCallback(
     async (configuration: Configuration | null) => {
-      console.log(configuration);
       const today: Date = new Date();
       const beginningOfTheMonth: Date = new Date(
         today.getUTCFullYear(),
