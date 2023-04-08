@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   textInputStyle: {
     fontFamily: FontsEnum.MEDIUM,
     fontSize: 15,
+    backgroundColor: ColorsEnum.INPUT_BACKGROUND_COLOR,
   },
 });
 

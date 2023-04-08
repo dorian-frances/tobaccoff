@@ -19,7 +19,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "package": "com.tobaccoff",
+        "package": "com.dev.dfrances.tobaccoff",
         "versionCode": 1,
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
