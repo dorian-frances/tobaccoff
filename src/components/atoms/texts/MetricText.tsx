@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native-paper';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
 export type MetricTextProps = {
   metric: number;
@@ -18,7 +19,13 @@ const MetricText = ({
   fontSize = 40,
 }: MetricTextProps) => {
   return (
-    <Text style={{ fontFamily: FontsEnum.BOLD, fontSize: fontSize }}>
+    <Text
+      style={{
+        fontFamily: FontsEnum.BOLD,
+        fontSize: fontSize,
+        color: ColorsEnum.BUSINESS_TEXT_COLOR,
+      }}
+    >
       {new Intl.NumberFormat('fr-FR', formatOptions).format(metric)}
     </Text>
   );
