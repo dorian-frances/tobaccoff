@@ -50,9 +50,7 @@ const DatePicker = ({
             <Icon name={'calendar-blank'} size={heightPixel(25)} />
           </View>
           <View style={{ marginLeft: widthPixel(15) }}>
-            <Text style={{ color: ColorsEnum.INDICATIVE_TEXT_COLOR }}>
-              {infoText}
-            </Text>
+            <Text style={{ color: ColorsEnum.NEUTRAL_75 }}>{infoText}</Text>
             <Text style={{ color: ColorsEnum.BLACK }} testID={'dateText'}>
               {date.toLocaleDateString()}
             </Text>
@@ -77,7 +75,7 @@ const styles = StyleSheet.create({
   datePickerButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderColor: ColorsEnum.INPUT_STROKE_COLOR,
+    borderColor: ColorsEnum.NEUTRAL_75,
     borderWidth: 1,
     borderRadius: 100,
     height: heightPixel(50),

@@ -35,7 +35,7 @@ const TextInput = ({
       }}
       outlineStyle={{
         borderRadius: 100,
-        borderColor: ColorsEnum.INPUT_STROKE_COLOR,
+        borderColor: ColorsEnum.NEUTRAL_75,
       }}
       keyboardType={'numeric'}
       testID={'text-input-ID'}

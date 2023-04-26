@@ -1,4 +1,10 @@
-import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  RefreshControl,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  View,
+} from 'react-native';
 import MetricsHeader from '../organisms/metrics/MetricsHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MetricsPrimary from '../organisms/metrics/MetricsPrimary';
@@ -23,11 +29,11 @@ import { MetricsScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
 import Divider from '../atoms/dividers/Divider';
 import {
-  fontPixel,
   fontStyles,
   heightPixel,
   widthPixel,
 } from '../../utils/font-scale.utils';
+import MetricsLastUpdate from '../organisms/metrics/MetricsLastUpdate';
 
 type Props = {
   navigation: MetricsScreenNavigationProp;
@@ -53,6 +59,7 @@ const MetricsPage = ({ navigation }: Props) => {
   const [lifeDays, setLifeDays] = useState(0);
   const [nonSmokedCigarettes, setNonSmokedCigarettes] = useState(0);
   const [smokedCigarettes, setSmokedCigarettes] = useState(0);
+  const [lastUpdateDate, setLastUpdateDate] = useState(new Date());
   const [showResetDialog, setShowResetDialog] = useState(false);
   const [showAddCigaretteDialog, setShowAddCigaretteDialog] = useState(false);
   const [showAddVapeExpenseDialog, setShowAddVapeExpenseDialog] =
@@ -129,6 +136,7 @@ const MetricsPage = ({ navigation }: Props) => {
             .reduce((sum, nexValue) => sum + nexValue, 0)
         );
       }
+      setLastUpdateDate(new Date());
     },
     [metricService, smokedCigarettesService, vapeExpenseService]
   );
@@ -192,130 +200,136 @@ const MetricsPage = ({ navigation }: Props) => {
   }, [configuration, computeAndDisplayMetrics]);
 
   return (
-    <SafeAreaView style={styles.headerContainer}>
-      <ScrollView
-        style={styles.scrollViewStyle}
-        contentContainerStyle={styles.contentScrollViewStyle}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <View style={styles.headerStyle}>
-          <MetricsHeader
-            infoTextProps={{
-              text: `Depuis le ${new Date(sinceValue).toLocaleDateString()}`,
-            }}
-            onPress={toggleResetDialog}
-          />
-        </View>
-        <View style={styles.savingsStyle}>
-          <MetricsPrimary
-            totalSavingsProps={{
-              sectionTextProps: {
-                text: 'Economies totales',
-                fontSize: fontStyles.title,
-              },
-              metricTextProps: {
-                metric: totalSavings,
-                formatOptions: { style: 'currency', currency: 'EUR' },
-                fontSize: fontStyles.xxTitle,
-              },
-            }}
-            monthlySavingsProps={{
-              sectionTextProps: {
-                text: 'Ce mois-ci',
-                fontSize: fontStyles.body,
-              },
-              metricTextProps: {
-                metric: monthSavings,
-                formatOptions: { style: 'currency', currency: 'EUR' },
-                fontSize: fontStyles.xTitle,
-              },
-            }}
-          />
-        </View>
-        <View style={styles.dividerStyle}>
-          <Divider color={ColorsEnum.INPUT_STROKE_COLOR} />
-        </View>
-        <View style={styles.secondaryMetricsStyle}>
-          <MetricsSecondary
-            nonSmokedMetricProps={{
-              metricTextProps: {
-                metric: nonSmokedCigarettes,
-                formatOptions: { style: 'decimal', maximumFractionDigits: 0 },
-                fontSize: fontStyles.xTitle,
-              },
-              sectionTextProps: {
-                text: 'Cigarettes non-fumées',
-                fontSize: fontStyles.small,
-              },
-            }}
-            smokedMetricProps={{
-              metricTextProps: {
-                metric: smokedCigarettes,
-                formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
-                fontSize: fontStyles.xTitle,
-              },
-              sectionTextProps: {
-                text: 'Cigarettes fumées',
-                fontSize: fontStyles.small,
-              },
-            }}
-            lifePointsMetricProps={{
-              metricTextProps: {
-                metric: lifeDays,
-                formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
-                fontSize: fontStyles.xTitle,
-              },
-              sectionTextProps: {
-                text: 'Jours de vie gagnés',
-                fontSize: fontStyles.small,
-              },
-            }}
-          />
-        </View>
-        <View style={styles.failButtonsStyle}>
-          <MetricsFailButtons
-            addCigaretteOnPress={toggleAddCigaretteDialog}
-            addVapeExpenseOnPress={toggleAddVapeExpenseDialog}
-          />
-        </View>
-      </ScrollView>
-      <MetricsDialogResetCounter
-        showDialog={showResetDialog}
-        toggleDialog={toggleResetDialog}
-        dialogTitle={'Attention'}
-        dialogDescription={
-          'Redémarrer le compteur effacera toutes les données de consommation. Es-tu sûr de vouloir continuer ?'
-        }
-        resetCounter={() => {
-          toggleResetDialog();
-          resetCounter();
-        }}
-      />
-      <MetricsDialogAddCigarette
-        dialogTitle={"T'as craqué ?"}
-        sliderText={'Indique le nombre de cigarettes que tu as fumé\n'}
-        showDialog={showAddCigaretteDialog}
-        toggleDialog={toggleAddCigaretteDialog}
-        onValidate={saveSmokedCigarettes}
-        minimumSlider={1}
-        maximumSlider={30}
-        stepSlider={1}
-        defaultValue={5}
-      />
-      <MetricsDialogAddVapeExpense
-        description={'Indique tes dépenses de vapotage'}
-        toggleDialog={toggleAddVapeExpenseDialog}
-        onValidate={saveVapeExpense}
-        showDialog={showAddVapeExpenseDialog}
-      />
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor={ColorsEnum.WHITE} barStyle={'dark-content'} />
+      <SafeAreaView style={styles.container}>
+        <ScrollView
+          style={styles.scrollViewStyle}
+          contentContainerStyle={styles.contentScrollViewStyle}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <View style={styles.headerStyle}>
+            <MetricsHeader
+              infoTextProps={{
+                text: `Depuis le ${new Date(sinceValue).toLocaleDateString()}`,
+              }}
+              onPress={toggleResetDialog}
+            />
+          </View>
+          <View style={styles.savingsStyle}>
+            <MetricsPrimary
+              totalSavingsProps={{
+                sectionTextProps: {
+                  text: 'Economies totales',
+                  fontSize: fontStyles.title,
+                },
+                metricTextProps: {
+                  metric: totalSavings,
+                  formatOptions: { style: 'currency', currency: 'EUR' },
+                  fontSize: fontStyles.xxTitle,
+                },
+              }}
+              monthlySavingsProps={{
+                sectionTextProps: {
+                  text: 'Ce mois-ci',
+                  fontSize: fontStyles.body,
+                },
+                metricTextProps: {
+                  metric: monthSavings,
+                  formatOptions: { style: 'currency', currency: 'EUR' },
+                  fontSize: fontStyles.xTitle,
+                },
+              }}
+            />
+          </View>
+          <View style={styles.dividerStyle}>
+            <Divider color={ColorsEnum.NEUTRAL_75} />
+          </View>
+          <View style={styles.secondaryMetricsStyle}>
+            <MetricsSecondary
+              nonSmokedMetricProps={{
+                metricTextProps: {
+                  metric: nonSmokedCigarettes,
+                  formatOptions: { style: 'decimal', maximumFractionDigits: 0 },
+                  fontSize: fontStyles.xTitle,
+                },
+                sectionTextProps: {
+                  text: 'Cigarettes non-fumées',
+                  fontSize: fontStyles.small,
+                },
+              }}
+              smokedMetricProps={{
+                metricTextProps: {
+                  metric: smokedCigarettes,
+                  formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
+                  fontSize: fontStyles.xTitle,
+                },
+                sectionTextProps: {
+                  text: 'Cigarettes fumées',
+                  fontSize: fontStyles.small,
+                },
+              }}
+              lifePointsMetricProps={{
+                metricTextProps: {
+                  metric: lifeDays,
+                  formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
+                  fontSize: fontStyles.xTitle,
+                },
+                sectionTextProps: {
+                  text: 'Jours de vie gagnés',
+                  fontSize: fontStyles.small,
+                },
+              }}
+            />
+          </View>
+          <View style={styles.failButtonsStyle}>
+            <MetricsFailButtons
+              addCigaretteOnPress={toggleAddCigaretteDialog}
+              addVapeExpenseOnPress={toggleAddVapeExpenseDialog}
+            />
+          </View>
+          <View style={styles.lastUpdateStyle}>
+            <MetricsLastUpdate lastUpdateDate={lastUpdateDate} />
+          </View>
+        </ScrollView>
+        <MetricsDialogResetCounter
+          showDialog={showResetDialog}
+          toggleDialog={toggleResetDialog}
+          dialogTitle={'Attention'}
+          dialogDescription={
+            'Redémarrer le compteur effacera toutes les données de consommation. Es-tu sûr de vouloir continuer ?'
+          }
+          resetCounter={() => {
+            toggleResetDialog();
+            resetCounter();
+          }}
+        />
+        <MetricsDialogAddCigarette
+          dialogTitle={"T'as craqué ?"}
+          sliderText={'Indique le nombre de cigarettes que tu as fumé\n'}
+          showDialog={showAddCigaretteDialog}
+          toggleDialog={toggleAddCigaretteDialog}
+          onValidate={saveSmokedCigarettes}
+          minimumSlider={1}
+          maximumSlider={30}
+          stepSlider={1}
+          defaultValue={5}
+        />
+        <MetricsDialogAddVapeExpense
+          description={'Indique tes dépenses de vapotage'}
+          toggleDialog={toggleAddVapeExpenseDialog}
+          onValidate={saveVapeExpense}
+          showDialog={showAddVapeExpenseDialog}
+        />
+      </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  container: {
     flex: 1,
     paddingTop: widthPixel(10),
     alignItems: 'center',
@@ -352,6 +366,12 @@ const styles = StyleSheet.create({
     width: widthPixel(340),
     flex: 5,
     justifyContent: 'center',
+  },
+  lastUpdateStyle: {
+    width: widthPixel(340),
+    flex: 1,
+    justifyContent: 'center',
+    paddingBottom: heightPixel(20),
   },
 });
 

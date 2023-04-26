@@ -1,12 +1,14 @@
 export enum ColorsEnum {
-  INPUT_STROKE_COLOR = '#79747E',
-  INDICATIVE_TEXT_COLOR = '#79747E',
-
   // NEUTRAL
   BLACK = '#000000',
   WHITE = '#FFFFFF',
+  NEUTRAL_85 = '#d1d1e0',
+  NEUTRAL_75 = '#b3b3cb',
+  NEUTRAL_65 = '#A2A2B8',
+  NEUTRAL_55 = '#9292A6',
+  NEUTRAL_45 = '#7C7C8C',
 
-  // Buttons
+  // Primary
   PRIMARY_95 = '#f0eafb',
   PRIMARY_92 = '#E8DEF8',
   PRIMARY_75 = '#b696e9',
