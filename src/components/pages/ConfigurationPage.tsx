@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StatusBar, StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
 import ConfigurationCigaretteAmount from '../organisms/configuration/ConfigurationCigaretteAmount';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -29,42 +29,47 @@ const ConfigurationPage = ({ navigation }: Props) => {
   const [cigaretteAmountToSave, setCigaretteAmountToSave] = useState('');
 
   return (
-    <SafeAreaView style={styles.headerContainer}>
-      <View style={styles.headerStyle}>
-        <TextHeader text={'Paramétrage'} />
-      </View>
-      <View style={styles.stopDateConfigurationStyle}>
-        <ConfigurationStopDate
-          getStopDate={(date: Date) => getDateToSave(date)}
-        />
-      </View>
-      <View style={styles.cigaretteAmountConfigurationStyle}>
-        <ConfigurationCigaretteAmount
-          getCigaretteAmount={(cigaretteAmount) =>
-            setCigaretteAmountToSave(cigaretteAmount)
-          }
-          getCigaretteType={(cigaretteType: string) => {
-            cigaretteType === 'industrielles'
-              ? setCigaretteTypeToSave(CigaretteType.INDUSTRIAL)
-              : setCigaretteTypeToSave(CigaretteType.ROLLED);
-          }}
-        />
-      </View>
-      <View style={styles.validateButtonContainerStyle}>
-        <ButtonClassic
-          mode={'elevated'}
-          text={'Valider'}
-          labelStyle={styles.validateButtonLabelStyle}
-          onPress={() =>
-            configurationContextData.saveConfiguration(
-              dateToSave,
-              cigaretteTypeToSave,
-              cigaretteAmountToSave
-            )
-          }
-        />
-      </View>
-    </SafeAreaView>
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor={ColorsEnum.WHITE} barStyle={'dark-content'} />
+
+      <SafeAreaView style={styles.headerContainer}>
+        <View style={styles.headerStyle}>
+          <TextHeader text={'Paramétrage'} />
+        </View>
+        <View style={styles.stopDateConfigurationStyle}>
+          <ConfigurationStopDate
+            getStopDate={(date: Date) => getDateToSave(date)}
+          />
+        </View>
+        <View style={styles.cigaretteAmountConfigurationStyle}>
+          <ConfigurationCigaretteAmount
+            getCigaretteAmount={(cigaretteAmount) =>
+              setCigaretteAmountToSave(cigaretteAmount)
+            }
+            getCigaretteType={(cigaretteType: string) => {
+              cigaretteType === 'industrielles'
+                ? setCigaretteTypeToSave(CigaretteType.INDUSTRIAL)
+                : setCigaretteTypeToSave(CigaretteType.ROLLED);
+            }}
+          />
+        </View>
+        <View style={styles.validateButtonContainerStyle}>
+          <ButtonClassic
+            mode={'elevated'}
+            text={'Valider'}
+            labelStyle={styles.validateButtonLabelStyle}
+            onPress={() =>
+              configurationContextData.saveConfiguration(
+                dateToSave,
+                cigaretteTypeToSave,
+                cigaretteAmountToSave
+              )
+            }
+            buttonColor={ColorsEnum.PRIMARY_20}
+          />
+        </View>
+      </SafeAreaView>
+    </View>
   );
 };
 
@@ -79,23 +84,23 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   stopDateConfigurationStyle: {
-    width: widthPixel(314),
+    width: widthPixel(340),
     flex: 2,
     justifyContent: 'center',
   },
   cigaretteAmountConfigurationStyle: {
-    width: widthPixel(314),
+    width: widthPixel(340),
     flex: 3,
     justifyContent: 'center',
   },
   validateButtonContainerStyle: {
-    width: widthPixel(314),
+    width: widthPixel(340),
     flex: 4,
     justifyContent: 'center',
   },
   validateButtonLabelStyle: {
     fontFamily: FontsEnum.BOLD,
-    color: 'black',
+    color: ColorsEnum.WHITE,
     fontSize: fontStyles.subTitle,
   },
 });
