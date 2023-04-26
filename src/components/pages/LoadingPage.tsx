@@ -12,9 +12,9 @@ const LoadingPage = () => {
       }}
     >
       <ActivityIndicator
-        color={ColorsEnum.PRIMARY_COLOR_BUTTON}
+        color={ColorsEnum.PRIMARY_92}
         animating={true}
-        size="small"
+        size="large"
       />
     </SafeAreaView>
   );

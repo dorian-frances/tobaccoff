@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import { Button, Dialog, Portal, TextInput } from 'react-native-paper';
-import { FontsEnum } from '../../assets/fonts/fonts.enum';
-import { ColorsEnum } from '../../assets/colors/colors.enum';
+import { Dialog, Portal, TextInput as TextInputRNP } from 'react-native-paper';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
+import { fontStyles, heightPixel } from '../../../utils/font-scale.utils';
+import DialogButtons from '../../molecules/DialogButtons';
 
-type DialogAddVapeExpenseProps = {
-  dialogTitle: string;
+type MetricsDialogAddVapeExpenseProps = {
+  description: string;
   toggleDialog: () => void;
   onValidate: (value: string) => void;
   showDialog: boolean;
 };
 
-const DialogAddVapeExpense = ({
-  dialogTitle,
+const MetricsDialogAddVapeExpense = ({
+  description,
   toggleDialog,
   onValidate,
   showDialog,
-}: DialogAddVapeExpenseProps) => {
+}: MetricsDialogAddVapeExpenseProps) => {
   const [text, setText] = useState('');
 
   const replaceDotWithComa = (text: string) => {
@@ -25,10 +27,14 @@ const DialogAddVapeExpense = ({
 
   return (
     <Portal>
-      <Dialog visible={showDialog} onDismiss={toggleDialog}>
-        <Dialog.Title style={styles.title}>{dialogTitle}</Dialog.Title>
-        <Dialog.Content style={styles.container}>
-          <TextInput
+      <Dialog
+        visible={showDialog}
+        onDismiss={toggleDialog}
+        style={{ backgroundColor: ColorsEnum.WHITE }}
+      >
+        <Text style={styles.description}>{description}</Text>
+        <Dialog.Content style={styles.headerContainer}>
+          <TextInputRNP
             style={styles.textInput}
             value={text}
             onChangeText={(text) => setText(replaceDotWithComa(text))}
@@ -38,7 +44,7 @@ const DialogAddVapeExpense = ({
               borderColor: 'transparent',
             }}
             contentStyle={{
-              height: 100,
+              height: heightPixel(100),
             }}
             underlineColor={'transparent'}
             caretHidden={false}
@@ -48,22 +54,16 @@ const DialogAddVapeExpense = ({
           <Text style={styles.currencyText}>€</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button
-            onPress={() => {
+          <DialogButtons
+            onCancel={() => {
               toggleDialog();
               setText('');
             }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onPress={() => {
+            onValidate={() => {
               setText('');
               onValidate(text);
             }}
-          >
-            OK
-          </Button>
+          />
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -71,26 +71,26 @@ const DialogAddVapeExpense = ({
 };
 
 const styles = StyleSheet.create({
-  container: {
+  headerContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'center',
   },
-  title: {
+  description: {
     textAlign: 'center',
-    fontFamily: FontsEnum.SEMI_BOLD,
-    fontSize: 25,
+    fontFamily: FontsEnum.MEDIUM,
+    fontSize: fontStyles.body,
   },
   textInput: {
-    fontSize: 60,
+    fontSize: fontStyles.xxxTitle,
     fontWeight: 'bold',
   },
   currencyText: {
-    fontSize: 30,
+    fontSize: fontStyles.xTitle,
     fontFamily: FontsEnum.BOLD,
-    marginTop: 20,
-    color: ColorsEnum.BUSINESS_TEXT_COLOR,
+    marginTop: heightPixel(20),
+    color: ColorsEnum.BLACK,
   },
 });
 
-export default DialogAddVapeExpense;
+export default MetricsDialogAddVapeExpense;

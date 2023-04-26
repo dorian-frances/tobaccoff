@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button, Dialog, Portal } from 'react-native-paper';
 import { StyleSheet, Text } from 'react-native';
-import { FontsEnum } from '../../assets/fonts/fonts.enum';
+import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
+import DialogButtons from '../../molecules/DialogButtons';
 
-type DialogRestCounterProps = {
+type MetricsDialogRestCounterProps = {
   showDialog: boolean;
   toggleDialog: () => void;
   dialogTitle: string;
@@ -11,24 +13,27 @@ type DialogRestCounterProps = {
   resetCounter: () => void;
 };
 
-const DialogResetCounter = ({
+const MetricsDialogResetCounter = ({
   showDialog = false,
   toggleDialog,
   dialogTitle,
   dialogDescription,
   resetCounter,
-}: DialogRestCounterProps) => {
+}: MetricsDialogRestCounterProps) => {
   return (
     <Portal>
-      <Dialog visible={showDialog} onDismiss={toggleDialog}>
+      <Dialog
+        visible={showDialog}
+        onDismiss={toggleDialog}
+        style={{ backgroundColor: ColorsEnum.WHITE }}
+      >
         <Dialog.Icon icon="alert" size={40} />
         <Dialog.Title style={styles.title}>{dialogTitle}</Dialog.Title>
         <Dialog.Content>
-          <Text style={styles.textInput}>{dialogDescription}</Text>
+          <Text style={styles.description}>{dialogDescription}</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button onPress={toggleDialog}>Cancel</Button>
-          <Button onPress={resetCounter}>Ok</Button>
+          <DialogButtons onCancel={toggleDialog} onValidate={resetCounter} />
         </Dialog.Actions>
       </Dialog>
     </Portal>
@@ -40,10 +45,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },
-  textInput: {
+  description: {
     textAlign: 'center',
     fontFamily: FontsEnum.MEDIUM,
   },
 });
 
-export default DialogResetCounter;
+export default MetricsDialogResetCounter;

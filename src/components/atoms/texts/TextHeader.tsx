@@ -1,20 +1,21 @@
 import { Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { fontStyles } from '../../../utils/font-scale.utils';
 
 type TextHeaderProps = {
   text: string;
 };
 
-const HeaderText = ({ text = 'Lorem Ipsum' }: TextHeaderProps) => {
+const TextHeader = ({ text = 'Lorem Ipsum' }: TextHeaderProps) => {
   return <Text style={styles.text}>{text}</Text>;
 };
 
 const styles = StyleSheet.create({
   text: {
     fontFamily: FontsEnum.BOLD,
-    fontSize: 40,
+    fontSize: fontStyles.xxTitle,
   },
 });
 
-export default HeaderText;
+export default TextHeader;

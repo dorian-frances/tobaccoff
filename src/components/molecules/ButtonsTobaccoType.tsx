@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { SegmentedButtons } from 'react-native-paper';
 
-export type SegmentedButtonsTobaccoTypeProps = {
+export type ButtonsTobaccoTypeProps = {
   defaultValue: string;
   getCigaretteType: (cigaretteType: string) => void;
 };
 
-const SegmentedButtonsTobaccoType = ({
+const ButtonsTobaccoType = ({
   defaultValue,
   getCigaretteType,
-}: SegmentedButtonsTobaccoTypeProps) => {
+}: ButtonsTobaccoTypeProps) => {
   const [cigaretteType, setCigaretteType] = useState(defaultValue);
   return (
     <SegmentedButtons
@@ -36,4 +36,4 @@ const SegmentedButtonsTobaccoType = ({
   );
 };
 
-export default SegmentedButtonsTobaccoType;
+export default ButtonsTobaccoType;

@@ -1,21 +1,20 @@
 import { RefreshControl, ScrollView, StyleSheet, View } from 'react-native';
-import MetricsHeader from '../organisms/MetricsHeader';
+import MetricsHeader from '../organisms/metrics/MetricsHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import PrimaryMetrics from '../organisms/PrimaryMetrics';
+import MetricsPrimary from '../organisms/metrics/MetricsPrimary';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
-import SecondaryMetrics from '../organisms/SecondaryMetrics';
-import FailButtons from '../organisms/FailButtons';
-import Restart from '../organisms/Restart';
+import MetricsSecondary from '../organisms/metrics/MetricsSecondary';
+import MetricsFailButtons from '../organisms/metrics/MetricsFailButtons';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { MetricService } from '../../services/metric.service';
 import { TimeUtils } from '../../utils/time.utils';
 import { CigaretteUtils } from '../../utils/cigarette.utils';
-import DialogResetCounter from '../organisms/DialogResetCounter';
-import DialogAddCigarette from '../organisms/DialogAddCigarette';
+import MetricsDialogResetCounter from '../organisms/metrics/MetricsDialogResetCounter';
+import MetricsDialogAddCigarette from '../organisms/metrics/MetricsDialogAddCigarette';
 import { SmokedCigarettes } from '../../model/smoked-cigarettes.model';
 import { SmokedCigarette } from '../../model/smoked-cigarette.model';
 import { SmokedCigaretteService } from '../../services/smoked-cigarette.service';
-import DialogAddVapeExpense from '../organisms/DialogAddVapeExpense';
+import MetricsDialogAddVapeExpense from '../organisms/metrics/MetricsDialogAddVapeExpense';
 import { VapeExpenses } from '../../model/vape-expenses.model';
 import { VapeExpenseService } from '../../services/vape-expense.service';
 import { VapeExpense } from '../../model/vape-expense.model';
@@ -23,6 +22,12 @@ import { Configuration } from '../../model/configuration.model';
 import { MetricsScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
 import Divider from '../atoms/dividers/Divider';
+import {
+  fontPixel,
+  fontStyles,
+  heightPixel,
+  widthPixel,
+} from '../../utils/font-scale.utils';
 
 type Props = {
   navigation: MetricsScreenNavigationProp;
@@ -187,7 +192,7 @@ const MetricsPage = ({ navigation }: Props) => {
   }, [configuration, computeAndDisplayMetrics]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.headerContainer}>
       <ScrollView
         style={styles.scrollViewStyle}
         contentContainerStyle={styles.contentScrollViewStyle}
@@ -200,73 +205,83 @@ const MetricsPage = ({ navigation }: Props) => {
             infoTextProps={{
               text: `Depuis le ${new Date(sinceValue).toLocaleDateString()}`,
             }}
+            onPress={toggleResetDialog}
           />
         </View>
         <View style={styles.savingsStyle}>
-          <PrimaryMetrics
+          <MetricsPrimary
             totalSavingsProps={{
               sectionTextProps: {
                 text: 'Economies totales',
-                fontSize: 22,
+                fontSize: fontStyles.title,
               },
               metricTextProps: {
                 metric: totalSavings,
                 formatOptions: { style: 'currency', currency: 'EUR' },
-                fontSize: 50,
+                fontSize: fontStyles.xxTitle,
               },
             }}
             monthlySavingsProps={{
-              sectionTextProps: { text: 'Ce mois-ci', fontSize: 18 },
+              sectionTextProps: {
+                text: 'Ce mois-ci',
+                fontSize: fontStyles.body,
+              },
               metricTextProps: {
                 metric: monthSavings,
                 formatOptions: { style: 'currency', currency: 'EUR' },
-                fontSize: 30,
+                fontSize: fontStyles.xTitle,
               },
             }}
           />
         </View>
         <View style={styles.dividerStyle}>
-          <Divider />
+          <Divider color={ColorsEnum.INPUT_STROKE_COLOR} />
         </View>
         <View style={styles.secondaryMetricsStyle}>
-          <SecondaryMetrics
+          <MetricsSecondary
             nonSmokedMetricProps={{
               metricTextProps: {
                 metric: nonSmokedCigarettes,
                 formatOptions: { style: 'decimal', maximumFractionDigits: 0 },
-                fontSize: 30,
+                fontSize: fontStyles.xTitle,
               },
-              sectionTextProps: { text: 'Cigarettes non-fumées', fontSize: 13 },
+              sectionTextProps: {
+                text: 'Cigarettes non-fumées',
+                fontSize: fontStyles.small,
+              },
             }}
             smokedMetricProps={{
               metricTextProps: {
                 metric: smokedCigarettes,
                 formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
-                fontSize: 30,
+                fontSize: fontStyles.xTitle,
               },
-              sectionTextProps: { text: 'Cigarettes fumées', fontSize: 13 },
+              sectionTextProps: {
+                text: 'Cigarettes fumées',
+                fontSize: fontStyles.small,
+              },
             }}
             lifePointsMetricProps={{
               metricTextProps: {
                 metric: lifeDays,
                 formatOptions: { style: 'decimal', maximumFractionDigits: 2 },
-                fontSize: 30,
+                fontSize: fontStyles.xTitle,
               },
-              sectionTextProps: { text: 'Jours de vie gagnés', fontSize: 13 },
+              sectionTextProps: {
+                text: 'Jours de vie gagnés',
+                fontSize: fontStyles.small,
+              },
             }}
           />
         </View>
         <View style={styles.failButtonsStyle}>
-          <FailButtons
+          <MetricsFailButtons
             addCigaretteOnPress={toggleAddCigaretteDialog}
             addVapeExpenseOnPress={toggleAddVapeExpenseDialog}
           />
         </View>
-        <View style={styles.restartStyle}>
-          <Restart onPress={toggleResetDialog} />
-        </View>
       </ScrollView>
-      <DialogResetCounter
+      <MetricsDialogResetCounter
         showDialog={showResetDialog}
         toggleDialog={toggleResetDialog}
         dialogTitle={'Attention'}
@@ -278,7 +293,7 @@ const MetricsPage = ({ navigation }: Props) => {
           resetCounter();
         }}
       />
-      <DialogAddCigarette
+      <MetricsDialogAddCigarette
         dialogTitle={"T'as craqué ?"}
         sliderText={'Indique le nombre de cigarettes que tu as fumé\n'}
         showDialog={showAddCigaretteDialog}
@@ -289,8 +304,8 @@ const MetricsPage = ({ navigation }: Props) => {
         stepSlider={1}
         defaultValue={5}
       />
-      <DialogAddVapeExpense
-        dialogTitle={'Dépenses de vapotage'}
+      <MetricsDialogAddVapeExpense
+        description={'Indique tes dépenses de vapotage'}
         toggleDialog={toggleAddVapeExpenseDialog}
         onValidate={saveVapeExpense}
         showDialog={showAddVapeExpenseDialog}
@@ -300,47 +315,42 @@ const MetricsPage = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  headerContainer: {
     flex: 1,
+    paddingTop: widthPixel(10),
     alignItems: 'center',
-    backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
+    backgroundColor: ColorsEnum.WHITE,
   },
-
-  scrollViewStyle: {
-    width: '100%',
-  },
+  scrollViewStyle: {},
   contentScrollViewStyle: {
     flex: 1,
     alignItems: 'center',
   },
   headerStyle: {
-    width: '80%',
+    width: widthPixel(340),
+    marginLeft: heightPixel(20),
     flex: 1,
     justifyContent: 'center',
+    zIndex: 1,
   },
   savingsStyle: {
-    width: '80%',
+    width: widthPixel(340),
     flex: 4,
     justifyContent: 'center',
   },
   dividerStyle: {
-    width: '80%',
-    flex: 1,
+    width: widthPixel(340),
+    flex: 2,
     justifyContent: 'center',
   },
   secondaryMetricsStyle: {
-    width: '80%',
+    width: widthPixel(340),
     flex: 3,
     justifyContent: 'center',
   },
   failButtonsStyle: {
-    width: '80%',
-    flex: 3,
-    justifyContent: 'center',
-  },
-  restartStyle: {
-    width: '80%',
-    flex: 3,
+    width: widthPixel(340),
+    flex: 5,
     justifyContent: 'center',
   },
 });

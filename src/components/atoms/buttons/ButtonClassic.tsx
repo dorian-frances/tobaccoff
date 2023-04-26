@@ -1,9 +1,10 @@
 import React from 'react';
 import { Button } from 'react-native-paper';
-import { ColorsEnum } from '../../../assets/colors/colors.enum';
 import { StyleProp, TextStyle } from 'react-native';
+import { heightPixel } from '../../../utils/font-scale.utils';
+import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-type ButtonComponentProps = {
+type ButtonClassicProps = {
   text: string;
   labelStyle: StyleProp<TextStyle>;
   mode: 'elevated' | 'outlined';
@@ -11,13 +12,13 @@ type ButtonComponentProps = {
   buttonColor?: string;
 };
 
-const ClassicButton = ({
+const ButtonClassic = ({
   text = 'Lorem Ipsum',
   labelStyle,
   mode = 'elevated',
-  buttonColor = ColorsEnum.PRIMARY_COLOR_BUTTON,
+  buttonColor = ColorsEnum.WHITE,
   onPress = () => console.log('Button pressed !'),
-}: ButtonComponentProps) => {
+}: ButtonClassicProps) => {
   return (
     <Button
       mode={mode}
@@ -25,11 +26,14 @@ const ClassicButton = ({
       labelStyle={labelStyle}
       loading={false}
       buttonColor={buttonColor}
-      contentStyle={{ paddingTop: 5, height: 45 }}
+      contentStyle={{
+        paddingTop: heightPixel(5),
+        height: heightPixel(45),
+      }}
     >
       {text}
     </Button>
   );
 };
 
-export default ClassicButton;
+export default ButtonClassic;

@@ -4,18 +4,20 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 import React, { useState } from 'react';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { heightPixel, widthPixel } from '../../utils/font-scale.utils';
+import { StyleSheet } from 'react-native';
 
-type DatePickerButtonProps = {
+type DatePickerProps = {
   infoText: string;
   defaultDate: Date;
   getStopDate: (stopDate: Date) => void;
 };
 
-const DatePickerButton = ({
+const DatePicker = ({
   infoText = 'Lorem Ipsum',
   defaultDate,
   getStopDate,
-}: DatePickerButtonProps) => {
+}: DatePickerProps) => {
   const [date, setDate] = useState(defaultDate);
   const [show, setShow] = useState(false);
 
@@ -39,32 +41,19 @@ const DatePickerButton = ({
         onPress={showMode}
         style={{
           borderRadius: 100,
-          height: 50,
+          height: heightPixel(50),
         }}
         testID={'dateTimePickerTouchable'}
       >
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            borderColor: ColorsEnum.INPUT_STROKE_COLOR,
-            borderWidth: 1,
-            borderRadius: 100,
-            height: 50,
-            backgroundColor: ColorsEnum.INPUT_BACKGROUND_COLOR,
-          }}
-        >
-          <View style={{ marginLeft: 15 }}>
-            <Icon name={'calendar-blank'} size={25} />
+        <View style={styles.datePickerButton}>
+          <View style={{ marginLeft: widthPixel(15) }}>
+            <Icon name={'calendar-blank'} size={heightPixel(25)} />
           </View>
-          <View style={{ marginLeft: 15 }}>
+          <View style={{ marginLeft: widthPixel(15) }}>
             <Text style={{ color: ColorsEnum.INDICATIVE_TEXT_COLOR }}>
               {infoText}
             </Text>
-            <Text
-              style={{ color: ColorsEnum.BUSINESS_TEXT_COLOR }}
-              testID={'dateText'}
-            >
+            <Text style={{ color: ColorsEnum.BLACK }} testID={'dateText'}>
               {date.toLocaleDateString()}
             </Text>
           </View>
@@ -84,4 +73,16 @@ const DatePickerButton = ({
   );
 };
 
-export default DatePickerButton;
+const styles = StyleSheet.create({
+  datePickerButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: ColorsEnum.INPUT_STROKE_COLOR,
+    borderWidth: 1,
+    borderRadius: 100,
+    height: heightPixel(50),
+    backgroundColor: ColorsEnum.WHITE,
+  },
+});
+
+export default DatePicker;
