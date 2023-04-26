@@ -3,23 +3,24 @@ import React from 'react';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';
 
-export type SectionTextProps = {
+export type TextSectionProps = {
   text: string;
   fontSize: number;
   color?: ColorsEnum;
 };
 
-const SectionText = ({
+const TextSection = ({
   text = 'Section text example',
-  fontSize = 22,
-  color = ColorsEnum.BUSINESS_TEXT_COLOR,
-}: SectionTextProps) => {
+  fontSize,
+  color = ColorsEnum.BLACK,
+}: TextSectionProps) => {
   return (
     <Text
       style={{
         fontFamily: FontsEnum.MEDIUM,
         fontSize: fontSize,
         color: color,
+        textAlign: 'center',
       }}
     >
       {text}
@@ -27,4 +28,4 @@ const SectionText = ({
   );
 };
 
-export default SectionText;
+export default TextSection;

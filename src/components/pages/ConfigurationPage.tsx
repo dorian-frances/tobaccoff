@@ -1,15 +1,20 @@
 import { StyleSheet, View } from 'react-native';
 import React, { useState } from 'react';
-import CigaretteAmountConfiguration from '../organisms/CigaretteAmountConfiguration';
+import ConfigurationCigaretteAmount from '../organisms/configuration/ConfigurationCigaretteAmount';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ClassicButton from '../atoms/buttons/ClassicButton';
-import HeaderText from '../atoms/texts/HeaderText';
-import StopDateConfiguration from '../organisms/StopDateConfiguration';
+import ButtonClassic from '../atoms/buttons/ButtonClassic';
+import TextHeader from '../atoms/texts/TextHeader';
+import ConfigurationStopDate from '../organisms/configuration/ConfigurationStopDate';
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import { CigaretteType } from '../../model/configuration.model';
 import { ConfigurationScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
+import {
+  fontPixel,
+  fontStyles,
+  widthPixel,
+} from '../../utils/font-scale.utils';
 
 type Props = {
   navigation: ConfigurationScreenNavigationProp;
@@ -24,17 +29,17 @@ const ConfigurationPage = ({ navigation }: Props) => {
   const [cigaretteAmountToSave, setCigaretteAmountToSave] = useState('');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.headerContainer}>
       <View style={styles.headerStyle}>
-        <HeaderText text={'Paramétrage'} />
+        <TextHeader text={'Paramétrage'} />
       </View>
       <View style={styles.stopDateConfigurationStyle}>
-        <StopDateConfiguration
+        <ConfigurationStopDate
           getStopDate={(date: Date) => getDateToSave(date)}
         />
       </View>
       <View style={styles.cigaretteAmountConfigurationStyle}>
-        <CigaretteAmountConfiguration
+        <ConfigurationCigaretteAmount
           getCigaretteAmount={(cigaretteAmount) =>
             setCigaretteAmountToSave(cigaretteAmount)
           }
@@ -46,7 +51,7 @@ const ConfigurationPage = ({ navigation }: Props) => {
         />
       </View>
       <View style={styles.validateButtonContainerStyle}>
-        <ClassicButton
+        <ButtonClassic
           mode={'elevated'}
           text={'Valider'}
           labelStyle={styles.validateButtonLabelStyle}
@@ -64,34 +69,34 @@ const ConfigurationPage = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  headerContainer: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: ColorsEnum.VIEW_BACKGROUND_COLOR,
+    backgroundColor: ColorsEnum.WHITE,
   },
   headerStyle: {
     flex: 2,
     justifyContent: 'center',
   },
   stopDateConfigurationStyle: {
-    width: '80%',
+    width: widthPixel(314),
     flex: 2,
     justifyContent: 'center',
   },
   cigaretteAmountConfigurationStyle: {
-    width: '80%',
+    width: widthPixel(314),
     flex: 3,
     justifyContent: 'center',
   },
   validateButtonContainerStyle: {
-    width: '80%',
+    width: widthPixel(314),
     flex: 4,
     justifyContent: 'center',
   },
   validateButtonLabelStyle: {
     fontFamily: FontsEnum.BOLD,
     color: 'black',
-    fontSize: 20,
+    fontSize: fontStyles.subTitle,
   },
 });
 

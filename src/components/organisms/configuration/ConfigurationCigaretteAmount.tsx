@@ -1,25 +1,30 @@
 import { StyleSheet, View } from 'react-native';
 import React from 'react';
-import SectionText from '../atoms/texts/SectionText';
-import SegmentedButtonsTobaccoType from '../molecules/SegmentedButtonsTobaccoType';
-import InputText from '../atoms/texts/InputText';
+import TextSection from '../../atoms/texts/TextSection';
+import ButtonsTobaccoType from '../../molecules/ButtonsTobaccoType';
+import TextInput from '../../atoms/texts/TextInput';
+import {
+  fontPixel,
+  fontStyles,
+  heightPixel,
+} from '../../../utils/font-scale.utils';
 
 type ConfigurationCigaretteAmountProps = {
   getCigaretteAmount: (cigaretteAmount: string) => void;
   getCigaretteType: (cigaretteType: string) => void;
 };
 
-const CigaretteAmountConfiguration = ({
+const ConfigurationCigaretteAmount = ({
   getCigaretteAmount,
   getCigaretteType,
 }: ConfigurationCigaretteAmountProps) => {
   return (
     <View>
       <View style={styles.sectionTextStyle}>
-        <SectionText text={'Je fumais : '} fontSize={22} />
+        <TextSection text={'Je fumais : '} fontSize={fontStyles.subTitle} />
       </View>
       <View style={styles.segmentedButtonStyle}>
-        <SegmentedButtonsTobaccoType
+        <ButtonsTobaccoType
           defaultValue={'industrial'}
           getCigaretteType={(cigaretteType: string) =>
             getCigaretteType(cigaretteType)
@@ -27,7 +32,7 @@ const CigaretteAmountConfiguration = ({
         />
       </View>
       <View style={styles.inputTextStyle}>
-        <InputText
+        <TextInput
           label={'Cigarettes / jour'}
           rightText={'/jour'}
           getValue={(cigaretteAmount: string) => {
@@ -43,12 +48,12 @@ const CigaretteAmountConfiguration = ({
 const styles = StyleSheet.create({
   sectionTextStyle: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: heightPixel(20),
   },
   segmentedButtonStyle: {
-    marginBottom: 20,
+    marginBottom: heightPixel(20),
   },
   inputTextStyle: {},
 });
 
-export default CigaretteAmountConfiguration;
+export default ConfigurationCigaretteAmount;

@@ -1,20 +1,28 @@
 import React from 'react';
-import SectionText from '../atoms/texts/SectionText';
+import TextSection from '../../atoms/texts/TextSection';
 import { StyleSheet, View } from 'react-native';
-import DatePickerButton from '../molecules/DatePickerButton';
+import DatePicker from '../../molecules/DatePicker';
+import {
+  fontPixel,
+  fontStyles,
+  widthPixel,
+} from '../../../utils/font-scale.utils';
 
-type StopDateConfigurationProps = {
+type ConfigurationStopDateProps = {
   getStopDate: (stopDate: Date) => void;
 };
 
-const StopDateConfiguration = ({ getStopDate }: StopDateConfigurationProps) => {
+const ConfigurationStopDate = ({ getStopDate }: ConfigurationStopDateProps) => {
   return (
-    <View style={styles.container}>
+    <View>
       <View style={styles.sectionTextStyle}>
-        <SectionText text={"J'ai arrêté depuis : "} fontSize={22} />
+        <TextSection
+          text={"J'ai arrêté depuis : "}
+          fontSize={fontStyles.subTitle}
+        />
       </View>
       <View style={styles.datePickerStyle}>
-        <DatePickerButton
+        <DatePicker
           infoText={'Sélectionnez une date'}
           defaultDate={new Date()}
           getStopDate={(stopDate: Date) => getStopDate(stopDate)}
@@ -25,14 +33,11 @@ const StopDateConfiguration = ({ getStopDate }: StopDateConfigurationProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
   sectionTextStyle: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: widthPixel(20),
   },
   datePickerStyle: {},
 });
 
-export default StopDateConfiguration;
+export default ConfigurationStopDate;

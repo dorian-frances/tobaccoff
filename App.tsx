@@ -1,9 +1,5 @@
-import {
-  configureFonts,
-  Provider as PaperProvider,
-  useTheme,
-} from 'react-native-paper';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
+import React from 'react';
 import { useFonts } from 'expo-font';
 import { fr, registerTranslation } from 'react-native-paper-dates';
 import { ConfigurationProvider } from './src/context/ConfigurationContext';
@@ -19,35 +15,12 @@ const App = () => {
     'Montserrat-Bold': require('./src/assets/fonts/Montserrat-Bold.ttf'),
     'Montserrat-ExtraBold': require('./src/assets/fonts/Montserrat-ExtraBold.ttf'),
   });
-
-  const baseFonts = {
-    fontFamily: 'Montserrat-Medium',
-  } as const;
-
-  const baseVariants = configureFonts({ config: baseFonts });
-
-  const customVariants = {
-    bold: {
-      ...baseVariants.bodyMedium,
-      fontFamily: 'Montserrat-Bold',
-    },
-  } as const;
-
-  const fonts = configureFonts({
-    config: {
-      ...baseFonts,
-      ...customVariants,
-    },
-  });
-
-  const theme = useTheme();
-
   if (!fontLoaded) {
     return null;
   }
 
   return (
-    <PaperProvider theme={{ ...theme, fonts }}>
+    <PaperProvider>
       <ConfigurationProvider>
         <Router />
       </ConfigurationProvider>

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { TextInput } from 'react-native-paper';
+import { TextInput as TextInputRNP } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { ColorsEnum } from '../../../assets/colors/colors.enum';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { fontPixel, fontStyles } from '../../../utils/font-scale.utils';
 
-type CigaretteAmountTextInputProps = {
+type TextInputProps = {
   mode?: 'flat' | 'outlined';
   label: string;
   rightText?: string;
@@ -12,28 +13,27 @@ type CigaretteAmountTextInputProps = {
   placeholder: string;
 };
 
-const InputText = ({
+const TextInput = ({
   mode = 'outlined',
   label = 'Lorem ipsum',
   rightText = '/Lorem',
   getValue,
   placeholder,
-}: CigaretteAmountTextInputProps) => {
+}: TextInputProps) => {
   const [inputValue, setInputValue] = useState('');
 
   return (
-    <TextInput
+    <TextInputRNP
       mode={mode}
       label={label}
-      right={<TextInput.Affix text={rightText} />}
+      right={<TextInputRNP.Affix text={rightText} />}
       placeholder={placeholder}
       style={styles.textInputStyle}
-      onChangeText={(value) => {
+      onChangeText={(value: string) => {
         setInputValue(value);
         getValue(value);
       }}
       outlineStyle={{
-        width: '100%',
         borderRadius: 100,
         borderColor: ColorsEnum.INPUT_STROKE_COLOR,
       }}
@@ -46,9 +46,9 @@ const InputText = ({
 const styles = StyleSheet.create({
   textInputStyle: {
     fontFamily: FontsEnum.MEDIUM,
-    fontSize: 15,
-    backgroundColor: ColorsEnum.INPUT_BACKGROUND_COLOR,
+    fontSize: fontStyles.small,
+    backgroundColor: ColorsEnum.WHITE,
   },
 });
 
-export default InputText;
+export default TextInput;

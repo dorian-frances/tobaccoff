@@ -2,20 +2,21 @@ import React from 'react';
 import { Text } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
+import { fontStyles } from '../../../utils/font-scale.utils';
 
-export type InfoTextProps = {
+export type TextInfoProps = {
   text: string;
 };
 
-const InfoText = ({ text = 'Lorem Ipsum' }: InfoTextProps) => {
+const TextInfo = ({ text = 'Lorem Ipsum' }: TextInfoProps) => {
   return <Text style={styles.textStyle}>{text}</Text>;
 };
 
 const styles = StyleSheet.create({
   textStyle: {
     fontFamily: FontsEnum.MEDIUM,
-    fontSize: 10,
+    fontSize: fontStyles.mini,
   },
 });
 
-export default InfoText;
+export default TextInfo;
