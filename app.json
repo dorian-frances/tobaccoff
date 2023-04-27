@@ -2,7 +2,7 @@
   "expo": {
     "name": "Tobaccoff",
     "slug": "tobaccoff",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,11 +19,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "package": "com.dev.dfrances.tobaccoff",
-        "versionCode": 1,
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+      "versionCode": 2,
       "package": "com.dev.dfrances.tobaccoff"
     },
     "web": {
