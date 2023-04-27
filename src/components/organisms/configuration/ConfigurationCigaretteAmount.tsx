@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
   },
   segmentedButtonStyle: {
     marginBottom: heightPixel(20),
+    alignItems: 'center',
   },
   inputTextStyle: {},
 });

@@ -50,7 +50,7 @@ const DatePicker = ({
             <Icon name={'calendar-blank'} size={heightPixel(25)} />
           </View>
           <View style={{ marginLeft: widthPixel(15) }}>
-            <Text style={{ color: ColorsEnum.NEUTRAL_75 }}>{infoText}</Text>
+            <Text style={{ color: ColorsEnum.NEUTRAL_35 }}>{infoText}</Text>
             <Text style={{ color: ColorsEnum.BLACK }} testID={'dateText'}>
               {date.toLocaleDateString()}
             </Text>

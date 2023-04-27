@@ -7,13 +7,18 @@ export enum ColorsEnum {
   NEUTRAL_65 = '#A2A2B8',
   NEUTRAL_55 = '#9292A6',
   NEUTRAL_45 = '#7C7C8C',
+  NEUTRAL_35 = '#6E6E7B',
 
   // Primary
   PRIMARY_95 = '#f0eafb',
   PRIMARY_92 = '#E8DEF8',
   PRIMARY_75 = '#b696e9',
   PRIMARY_65 = '#986ce0',
+  PRIMARY_50 = '#6c2dd2',
   PRIMARY_30 = '#411b7e',
   PRIMARY_25 = '#361669',
   PRIMARY_20 = '#2b1254',
+
+  // Cancel
+  WARNING = '#FF7676',
 }

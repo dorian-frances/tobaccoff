@@ -8,9 +8,14 @@ import { ColorsEnum } from '../../assets/colors/colors.enum';
 type DialogButtonsProps = {
   onCancel: () => void;
   onValidate: () => void;
+  isWarning?: boolean;
 };
 
-const DialogButtons = ({ onCancel, onValidate }: DialogButtonsProps) => {
+const DialogButtons = ({
+  onCancel,
+  onValidate,
+  isWarning,
+}: DialogButtonsProps) => {
   return (
     <View style={styles.container}>
       <ButtonDialog
@@ -18,6 +23,7 @@ const DialogButtons = ({ onCancel, onValidate }: DialogButtonsProps) => {
         text={'OK'}
         backgroundColor={ColorsEnum.PRIMARY_20}
         textColor={ColorsEnum.WHITE}
+        isWarning={isWarning}
       />
       <ButtonDialog
         onPress={onCancel}

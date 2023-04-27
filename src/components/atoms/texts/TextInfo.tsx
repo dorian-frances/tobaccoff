@@ -15,7 +15,7 @@ const TextInfo = ({ text = 'Lorem Ipsum', textAlign }: TextInfoProps) => {
       style={{
         fontFamily: FontsEnum.MEDIUM,
         fontSize: fontStyles.mini,
-        color: ColorsEnum.NEUTRAL_45,
+        color: ColorsEnum.NEUTRAL_35,
         textAlign: textAlign,
       }}
     >

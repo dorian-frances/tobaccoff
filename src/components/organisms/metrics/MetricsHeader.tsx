@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import TextInfo, { TextInfoProps } from '../../atoms/texts/TextInfo';
-import IconButton from '../../atoms/buttons/ButtonIcon';
+import ButtonIcon from '../../atoms/buttons/ButtonIcon';
 import { StyleSheet, View } from 'react-native';
 import { Menu } from 'react-native-paper';
 import { FontsEnum } from '../../../assets/fonts/fonts.enum';
@@ -26,7 +26,7 @@ const MetricsHeader = ({ infoTextProps, onPress }: MetricsHeaderProps) => {
         <Menu
           visible={visible}
           onDismiss={closeMenu}
-          anchor={<IconButton icon={'dots-vertical'} onPress={openMenu} />}
+          anchor={<ButtonIcon icon={'dots-vertical'} onPress={openMenu} />}
           contentStyle={{
             backgroundColor: ColorsEnum.PRIMARY_95,
           }}
@@ -41,6 +41,7 @@ const MetricsHeader = ({ infoTextProps, onPress }: MetricsHeaderProps) => {
             titleStyle={{
               fontSize: fontStyles.small,
               fontFamily: FontsEnum.MEDIUM,
+              color: ColorsEnum.PRIMARY_20,
             }}
           />
         </Menu>

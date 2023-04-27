@@ -26,7 +26,12 @@ const TextInput = ({
     <TextInputRNP
       mode={mode}
       label={label}
-      right={<TextInputRNP.Affix text={rightText} />}
+      right={
+        <TextInputRNP.Affix
+          text={rightText}
+          textStyle={{ color: ColorsEnum.NEUTRAL_35 }}
+        />
+      }
       placeholder={placeholder}
       style={styles.textInputStyle}
       onChangeText={(value: string) => {
