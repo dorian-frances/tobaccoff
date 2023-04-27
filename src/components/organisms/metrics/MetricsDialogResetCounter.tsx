@@ -33,7 +33,11 @@ const MetricsDialogResetCounter = ({
           <Text style={styles.description}>{dialogDescription}</Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <DialogButtons onCancel={toggleDialog} onValidate={resetCounter} />
+          <DialogButtons
+            onCancel={toggleDialog}
+            onValidate={resetCounter}
+            isWarning={true}
+          />
         </Dialog.Actions>
       </Dialog>
     </Portal>

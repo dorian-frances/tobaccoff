@@ -343,6 +343,7 @@ const styles = StyleSheet.create({
   headerStyle: {
     width: widthPixel(340),
     marginLeft: heightPixel(20),
+    paddingTop: heightPixel(10),
     flex: 1,
     justifyContent: 'center',
     zIndex: 1,

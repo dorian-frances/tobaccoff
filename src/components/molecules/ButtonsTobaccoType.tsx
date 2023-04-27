@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { SegmentedButtons } from 'react-native-paper';
+import { heightPixel, widthPixel } from '../../utils/font-scale.utils';
 
 export type ButtonsTobaccoTypeProps = {
   defaultValue: string;

@@ -28,7 +28,7 @@ const ButtonClassic = ({
       buttonColor={buttonColor}
       contentStyle={{
         paddingTop: heightPixel(5),
-        height: heightPixel(45),
+        height: heightPixel(50),
       }}
     >
       {text}
