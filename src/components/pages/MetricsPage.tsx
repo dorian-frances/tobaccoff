@@ -25,7 +25,6 @@ import { VapeExpenses } from '../../model/vape-expenses.model';
 import { VapeExpenseService } from '../../services/vape-expense.service';
 import { VapeExpense } from '../../model/vape-expense.model';
 import { Configuration } from '../../model/configuration.model';
-import { MetricsScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
 import Divider from '../atoms/dividers/Divider';
 import {
@@ -34,12 +33,15 @@ import {
   widthPixel,
 } from '../../utils/font-scale.utils';
 import MetricsLastUpdate from '../organisms/metrics/MetricsLastUpdate';
+import { MetricsScreenTabNavigationProp } from '../../stack/TabNavigation';
+import { useIsFocused } from '@react-navigation/native';
 
 type Props = {
-  navigation: MetricsScreenNavigationProp;
+  navigation: MetricsScreenTabNavigationProp;
 };
 
 const MetricsPage = ({ navigation }: Props) => {
+  const isFocused = useIsFocused();
   const configurationContextData = useConfiguration();
   const configuration: Configuration | null =
     configurationContextData.configurationData;
@@ -189,7 +191,7 @@ const MetricsPage = ({ navigation }: Props) => {
 
   useEffect(() => {
     computeAndDisplayMetrics(configuration);
-  }, [configuration, computeAndDisplayMetrics]);
+  }, [configuration, computeAndDisplayMetrics, isFocused]);
 
   const onRefresh = useCallback(() => {
     setRefreshing(true);
@@ -202,7 +204,7 @@ const MetricsPage = ({ navigation }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={ColorsEnum.WHITE} barStyle={'dark-content'} />
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={styles.safeAreaContainer}>
         <ScrollView
           style={styles.scrollViewStyle}
           contentContainerStyle={styles.contentScrollViewStyle}
@@ -329,7 +331,7 @@ const MetricsPage = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeAreaContainer: {
     flex: 1,
     paddingTop: widthPixel(10),
     alignItems: 'center',

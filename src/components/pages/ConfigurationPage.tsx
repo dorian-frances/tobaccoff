@@ -8,21 +8,17 @@ import ConfigurationStopDate from '../organisms/configuration/ConfigurationStopD
 import { ColorsEnum } from '../../assets/colors/colors.enum';
 import { FontsEnum } from '../../assets/fonts/fonts.enum';
 import { CigaretteType } from '../../model/configuration.model';
-import { ConfigurationScreenNavigationProp } from '../../stack/NativeStack';
 import { useConfiguration } from '../../hooks/UseConfiguration';
-import {
-  fontPixel,
-  fontStyles,
-  widthPixel,
-} from '../../utils/font-scale.utils';
+import { fontStyles, widthPixel } from '../../utils/font-scale.utils';
+import { ConfigurationScreenTabNavigationProp } from '../../stack/TabNavigation';
 
 type Props = {
-  navigation: ConfigurationScreenNavigationProp;
+  navigation: ConfigurationScreenTabNavigationProp;
 };
 
 const ConfigurationPage = ({ navigation }: Props) => {
   const configurationContextData = useConfiguration();
-  const [dateToSave, getDateToSave] = useState(new Date(Date.now()));
+  const [dateToSave, setDateToSave] = useState(new Date(Date.now()));
   const [cigaretteTypeToSave, setCigaretteTypeToSave] = useState(
     CigaretteType.INDUSTRIAL
   );
@@ -32,13 +28,13 @@ const ConfigurationPage = ({ navigation }: Props) => {
     <View style={{ flex: 1 }}>
       <StatusBar backgroundColor={ColorsEnum.WHITE} barStyle={'dark-content'} />
 
-      <SafeAreaView style={styles.headerContainer}>
+      <SafeAreaView style={styles.safeAreaContainer}>
         <View style={styles.headerStyle}>
           <TextHeader text={'Paramétrage'} />
         </View>
         <View style={styles.stopDateConfigurationStyle}>
           <ConfigurationStopDate
-            getStopDate={(date: Date) => getDateToSave(date)}
+            getStopDate={(date: Date) => setDateToSave(date)}
           />
         </View>
         <View style={styles.cigaretteAmountConfigurationStyle}>
@@ -74,7 +70,7 @@ const ConfigurationPage = ({ navigation }: Props) => {
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
+  safeAreaContainer: {
     flex: 1,
     alignItems: 'center',
     backgroundColor: ColorsEnum.WHITE,
